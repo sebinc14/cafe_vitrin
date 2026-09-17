@@ -53,9 +53,7 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cafe Arayüz Özelleştirici'),
-      ),
+      appBar: AppBar(title: const Text('Cafe Arayüz Özelleştirici')),
       drawer: CustomDrawerWidget(
         activeTable: _customizations['activeTable'],
         userName: "Misafir",
@@ -64,17 +62,45 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
         loyaltyStamps: 3,
         totalMokaPoints: 120,
         menuItems: [
-          DrawerMenuItem(icon: Icons.person_outline, title: "Profilim", onTap: () {}),
-          DrawerMenuItem(icon: Icons.history, title: "Sipariş Geçmişi", onTap: () {}),
-          DrawerMenuItem(icon: Icons.local_offer_outlined, title: "Kampanyalar", onTap: () {}),
-          DrawerMenuItem(icon: Icons.favorite_border, title: "Favorilerim", onTap: () {}),
-          DrawerMenuItem(icon: Icons.location_on_outlined, title: "Adreslerim", onTap: () {}),
-          DrawerMenuItem(icon: Icons.credit_card, title: "Ödeme Yöntemleri", onTap: () {}),
-          DrawerMenuItem(icon: Icons.help_outline, title: "İletişim ve Destek", onTap: () {}),
+          DrawerMenuItem(
+            icon: Icons.person_outline,
+            title: "Profilim",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.history,
+            title: "Sipariş Geçmişi",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.local_offer_outlined,
+            title: "Kampanyalar",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.favorite_border,
+            title: "Favorilerim",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.location_on_outlined,
+            title: "Adreslerim",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.credit_card,
+            title: "Ödeme Yöntemleri",
+            onTap: () {},
+          ),
+          DrawerMenuItem(
+            icon: Icons.help_outline,
+            title: "İletişim ve Destek",
+            onTap: () {},
+          ),
           DrawerMenuItem(icon: Icons.settings, title: "Ayarlar", onTap: () {}),
         ],
-        onCallWaiterTap: () => print("Garson Çağrıldı"),
-        onLogoutTap: () => print("Çıkış Yapıldı"),
+        onCallWaiterTap: () => debugPrint("Garson Çağrıldı"),
+        onLogoutTap: () => debugPrint("Çıkış Yapıldı"),
       ),
       // ORTA/SOL TARAF: Sabit Sıralı Kafe Vitrini (Canlı Önizleme)
       body: Center(
@@ -91,42 +117,72 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
                   activeTable: _customizations['activeTable'],
                   totalItemCount: 3,
                 ),
-                
+
                 // 2. Search
                 SearchWidget(
                   hintText: _customizations['searchHint'],
                   products: const [
-                    {"name": "Filter Coffee", "category": "Coffees", "price": 60.0, "imageUrl": "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=250&q=80"},
-                    {"name": "Latte", "category": "Coffees", "price": 75.0, "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80"},
+                    {
+                      "name": "Filter Coffee",
+                      "category": "Coffees",
+                      "price": 60.0,
+                      "imageUrl": "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=250&q=80",
+                    },
+                    {
+                      "name": "Latte",
+                      "category": "Coffees",
+                      "price": 75.0,
+                      "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80",
+                    },
                   ],
-                  onProductTap: (p) => print("Tapped: ${p['name']}"),
+                  onProductTap: (p) => debugPrint("Tapped: ${p['name']}"),
                 ),
-                
+
                 const SizedBox(height: 16),
 
                 // 3. Story
                 StoryWidget(
                   stories: const [
-                    {"image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=250&q=80", "title": "New Tastes", "isLive": true},
-                    {"image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80", "title": "Coffee Time", "isLive": false},
+                    {
+                      "image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=250&q=80",
+                      "title": "New Tastes",
+                      "isLive": true,
+                    },
+                    {
+                      "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80",
+                      "title": "Coffee Time",
+                      "isLive": false,
+                    },
                   ],
                 ),
-                
+
                 const SizedBox(height: 16),
 
                 // 4. Banner Carousel
                 const BannerCarouselWidget(
                   banners: [
-                    {"imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop", "tagText": "NEW", "title": "Summer Deals", "subtitle": "20% off all cold drinks!"},
+                    {
+                      "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=800&auto=format&fit=crop",
+                      "tagText": "NEW",
+                      "title": "Summer Deals",
+                      "subtitle": "20% off all cold drinks!",
+                    },
                   ],
                 ),
-                
+
                 const SizedBox(height: 16),
 
                 // 5. Flash Sale
                 FlashSaleWidget(
                   products: const [
-                    {"name": "Caramel Macchiato", "description": "Hot Drinks", "oldPrice": 120.0, "price": 80.0, "discountPercentage": 33.0, "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80"},
+                    {
+                      "name": "Caramel Macchiato",
+                      "description": "Hot Drinks",
+                      "oldPrice": 120.0,
+                      "price": 80.0,
+                      "discountPercentage": 33.0,
+                      "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80",
+                    },
                   ],
                   onProductTap: (p) => {},
                   onAddToCart: (p) => {},
@@ -145,13 +201,18 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
                   onAddToCart: () {},
                   onFavoriteToggle: () {},
                 ),
-                
+
                 const SizedBox(height: 24),
 
                 // Diğer sabit widget'lar...
                 QualityAndProductsWidget(
                   products: const [
-                    {"name": "Latte", "description": "Espresso and milk", "price": 75.0, "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80"},
+                    {
+                      "name": "Latte",
+                      "description": "Espresso and milk",
+                      "price": 75.0,
+                      "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80",
+                    },
                   ],
                   onProductTap: (p) => {},
                   onAddToCart: (p) => {},
@@ -166,7 +227,7 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
       ),
       floatingActionButton: FloatingCallWaiterWidget(
         activeTable: _customizations['activeTable'],
-        onCallWaiter: () => print("Waiter called"),
+        onCallWaiter: () => debugPrint("Waiter called"),
       ),
     );
   }

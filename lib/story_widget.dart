@@ -48,7 +48,7 @@ class StoryWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           final story = stories[index];
           final bool isLive = story["isLive"] == true;
-          
+
           return GestureDetector(
             onTap: () => _showStory(context, index),
             child: Padding(
@@ -91,22 +91,35 @@ class StoryWidget extends StatelessWidget {
                         Positioned(
                           bottom: 0,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: liveColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(color: Colors.white, width: 2),
                             ),
-                            child: const Text("LIVE", style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold)),
+                            child: const Text(
+                              "LIVE",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        )
+                        ),
                     ],
                   ),
                   const SizedBox(height: 6),
                   Text(
                     story["title"] ?? "",
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
-                  )
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -149,13 +162,19 @@ class _StoryViewerState extends State<_StoryViewer> {
 
   void _onTapLeft() {
     if (_currentIndex > 0) {
-      _pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
   void _onTapRight() {
     if (_currentIndex < widget.stories.length - 1) {
-      _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     } else {
       Navigator.pop(context); // Son hikayeden sonra kapat
     }
@@ -186,7 +205,9 @@ class _StoryViewerState extends State<_StoryViewer> {
                     height: MediaQuery.of(context).size.height * 0.85,
                     errorBuilder: (context, error, stackTrace) => Container(
                       color: Colors.grey.shade900,
-                      child: const Center(child: Icon(Icons.image, color: Colors.grey, size: 60)),
+                      child: const Center(
+                        child: Icon(Icons.image, color: Colors.grey, size: 60),
+                      ),
                     ),
                   ),
                 );
@@ -227,7 +248,9 @@ class _StoryViewerState extends State<_StoryViewer> {
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: 3,
                       decoration: BoxDecoration(
-                        color: index == _currentIndex ? Colors.white : Colors.white.withValues(alpha: 0.3),
+                        color: index == _currentIndex
+                            ? Colors.white
+                            : Colors.white.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -247,7 +270,9 @@ class _StoryViewerState extends State<_StoryViewer> {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(widget.stories[_currentIndex]["image"] ?? ""),
+                        backgroundImage: NetworkImage(
+                          widget.stories[_currentIndex]["image"] ?? "",
+                        ),
                         onBackgroundImageError: (_, _) {},
                         radius: 18,
                         backgroundColor: Colors.grey.shade800,
@@ -255,14 +280,25 @@ class _StoryViewerState extends State<_StoryViewer> {
                       const SizedBox(width: 10),
                       Text(
                         widget.stories[_currentIndex]["title"] ?? "",
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      const Text("2h", style: TextStyle(color: Colors.white70, fontSize: 12)) // Zaman göstergesi
+                      const Text(
+                        "2h",
+                        style: TextStyle(color: Colors.white70, fontSize: 12),
+                      ), // Zaman göstergesi
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white, size: 28),
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],

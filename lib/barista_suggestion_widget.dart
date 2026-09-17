@@ -1,27 +1,58 @@
 import 'package:flutter/material.dart';
 
+/// A widget for displaying a special product suggestion (e.g. Barista's Pick).
 class BaristaSuggestionWidget extends StatelessWidget {
+  /// The title of the suggestion section.
   final String sectionTitle;
+
+  /// The name of the suggested product.
   final String productName;
+
+  /// A brief description of the product.
   final String description;
+
+  /// The URL of the product image.
   final String imageUrl;
+
+  /// The price of the product.
   final double price;
+
+  /// The label displayed above the price.
   final String priceLabel;
+
+  /// The text displayed on the add button.
   final String addButtonText;
+
+  /// Whether the product is marked as favorite.
   final bool isFavorite;
 
+  /// The background color of the widget.
   final Color backgroundColor;
+
+  /// The color of the section title badge.
   final Color titleBadgeColor;
+
+  /// The color of the price text.
   final Color priceColor;
+
+  /// The color of the add button.
   final Color buttonColor;
+
+  /// The color of the favorite icon when active.
   final Color favoriteIconColor;
 
+  /// Callback triggered when the widget is tapped.
   final VoidCallback? onTap;
+
+  /// Callback triggered when the favorite icon is tapped.
   final VoidCallback? onFavoriteToggle;
+
+  /// Callback triggered when the add to cart button is tapped.
   final VoidCallback? onAddToCart;
 
+  /// Creates a new [BaristaSuggestionWidget].
   const BaristaSuggestionWidget({
-    super.key,
+    Key? key,
     this.sectionTitle = "Barista's Pick of the Day",
     required this.productName,
     required this.description,
@@ -38,7 +69,7 @@ class BaristaSuggestionWidget extends StatelessWidget {
     this.onTap,
     this.onFavoriteToggle,
     this.onAddToCart,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +84,11 @@ class BaristaSuggestionWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           color: backgroundColor,
           boxShadow: const [
-            BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4)),
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
           ],
         ),
         child: Row(
@@ -67,20 +102,24 @@ class BaristaSuggestionWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: imageUrl.isNotEmpty
-                      ? Image.network(
-                          imageUrl,
-                          width: 120,
-                          height: 136,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Container(
+                        ? Image.network(
+                            imageUrl,
+                            width: 120,
+                            height: 136,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                                  color: Colors.grey.shade300,
+                                  child: const Icon(
+                                    Icons.image,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                          )
+                        : Container(
                             color: Colors.grey.shade300,
                             child: const Icon(Icons.image, color: Colors.grey),
                           ),
-                        )
-                      : Container(
-                          color: Colors.grey.shade300,
-                          child: const Icon(Icons.image, color: Colors.grey),
-                        ),
                   ),
                   // Favori Butonu
                   Positioned(
@@ -91,7 +130,9 @@ class BaristaSuggestionWidget extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: isFavorite ? favoriteIconColor : Colors.black45,
+                          color: isFavorite
+                              ? favoriteIconColor
+                              : Colors.black45,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -106,7 +147,7 @@ class BaristaSuggestionWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            
+
             // Sağ Kısım: Bilgiler ve Buton
             Expanded(
               child: Column(
@@ -114,7 +155,10 @@ class BaristaSuggestionWidget extends StatelessWidget {
                 children: [
                   // Günün Barista Önerisi Başlığı (Sarı Border)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       border: Border.all(color: titleBadgeColor, width: 1),
                       borderRadius: BorderRadius.circular(20),
@@ -122,26 +166,38 @@ class BaristaSuggestionWidget extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.star_border, color: titleBadgeColor, size: 12),
+                        Icon(
+                          Icons.star_border,
+                          color: titleBadgeColor,
+                          size: 12,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           sectionTitle,
-                          style: TextStyle(color: titleBadgeColor, fontSize: 9, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: titleBadgeColor,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 6),
-                  
+
                   // Ürün Adı
                   Text(
                     productName,
-                    style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
-                  
+
                   // Açıklama
                   Text(
                     description,
@@ -150,7 +206,7 @@ class BaristaSuggestionWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
-                  
+
                   // Fiyat ve Ekle Butonu
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,20 +218,31 @@ class BaristaSuggestionWidget extends StatelessWidget {
                         children: [
                           Text(
                             priceLabel,
-                            style: const TextStyle(color: Colors.white54, fontSize: 9, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             "${price.toStringAsFixed(2)} TL",
-                            style: TextStyle(color: priceColor, fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: priceColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
-                      
+
                       // Ekle Butonu
                       GestureDetector(
                         onTap: onAddToCart,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: buttonColor,
                             borderRadius: BorderRadius.circular(20),
@@ -183,11 +250,19 @@ class BaristaSuggestionWidget extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.add, color: Colors.black87, size: 16),
+                              const Icon(
+                                Icons.add,
+                                color: Colors.black87,
+                                size: 16,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 addButtonText,
-                                style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 13),
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
                               ),
                             ],
                           ),

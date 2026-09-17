@@ -80,7 +80,7 @@ class _CartBottomSheet extends StatefulWidget {
   final double finalTotalPrice;
   final Color primaryColor;
   final Color accentColor;
-  
+
   final Function(int index)? onRemoveFromCart;
   final Function(int index)? onIncreaseQuantity;
   final Function(int index)? onDecreaseQuantity;
@@ -127,9 +127,13 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final deliveryText = widget.isHome ? widget.deliveryAddress : "In Cafe (${widget.activeTable})";
+    final deliveryText = widget.isHome
+        ? widget.deliveryAddress
+        : "In Cafe (${widget.activeTable})";
     final badgeText = widget.isHome ? "Home Delivery" : "Cafe Delivery";
-    final icon = widget.isHome ? Icons.delivery_dining : Icons.local_cafe_outlined;
+    final icon = widget.isHome
+        ? Icons.delivery_dining
+        : Icons.local_cafe_outlined;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.90,
@@ -143,25 +147,54 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             decoration: BoxDecoration(
               color: widget.primaryColor,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
             ),
             child: Row(
               children: [
-                Icon(Icons.shopping_bag_outlined, color: widget.accentColor, size: 24),
+                Icon(
+                  Icons.shopping_bag_outlined,
+                  color: widget.accentColor,
+                  size: 24,
+                ),
                 const SizedBox(width: 8),
-                const Text("My Order Cart", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text(
+                  "My Order Cart",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(width: 10),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(color: widget.accentColor, borderRadius: BorderRadius.circular(12)),
-                  child: Text("${widget.cartItems.length} Items", style: TextStyle(color: widget.primaryColor, fontSize: 11, fontWeight: FontWeight.bold)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: widget.accentColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    "${widget.cartItems.length} Items",
+                    style: TextStyle(
+                      color: widget.primaryColor,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
                     if (widget.onClearCart != null) widget.onClearCart!();
                   },
-                  child: Text("Clear", style: TextStyle(color: widget.accentColor, fontSize: 13)),
+                  child: Text(
+                    "Clear",
+                    style: TextStyle(color: widget.accentColor, fontSize: 13),
+                  ),
                 ),
                 const SizedBox(width: 16),
                 GestureDetector(
@@ -184,20 +217,40 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     text: TextSpan(
-                      style: const TextStyle(color: Colors.black87, fontSize: 13),
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 13,
+                      ),
                       children: [
                         const TextSpan(text: "Delivery: "),
-                        TextSpan(text: deliveryText, style: const TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                          text: deliveryText,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.brown.shade200)),
-                  child: Text(badgeText, style: TextStyle(color: widget.primaryColor, fontSize: 10, fontWeight: FontWeight.bold)),
-                )
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.brown.shade200),
+                  ),
+                  child: Text(
+                    badgeText,
+                    style: TextStyle(
+                      color: widget.primaryColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -211,7 +264,12 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                   if (widget.cartItems.isEmpty)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 40),
-                      child: Center(child: Text("Your cart is currently empty.", style: TextStyle(color: Colors.grey, fontSize: 15))),
+                      child: Center(
+                        child: Text(
+                          "Your cart is currently empty.",
+                          style: TextStyle(color: Colors.grey, fontSize: 15),
+                        ),
+                      ),
                     )
                   else
                     ...List.generate(widget.cartItems.length, (index) {
@@ -226,7 +284,13 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(color: Colors.grey.shade200),
-                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 8, offset: const Offset(0, 4))],
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.02),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,12 +298,32 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: imageUrl.isNotEmpty
-                                ? Image.network(
-                                    imageUrl,
-                                    width: 60, height: 60, fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) => Container(width: 60, height: 60, color: Colors.grey.shade200, child: const Icon(Icons.coffee, color: Colors.grey)),
-                                  )
-                                : Container(width: 60, height: 60, color: Colors.grey.shade200, child: const Icon(Icons.coffee, color: Colors.grey)),
+                                  ? Image.network(
+                                      imageUrl,
+                                      width: 60,
+                                      height: 60,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Container(
+                                                width: 60,
+                                                height: 60,
+                                                color: Colors.grey.shade200,
+                                                child: const Icon(
+                                                  Icons.coffee,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                    )
+                                  : Container(
+                                      width: 60,
+                                      height: 60,
+                                      color: Colors.grey.shade200,
+                                      child: const Icon(
+                                        Icons.coffee,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -247,52 +331,104 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Expanded(child: Text(item["title"]?.toString() ?? "", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14))),
+                                      Expanded(
+                                        child: Text(
+                                          item["title"]?.toString() ?? "",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
                                       GestureDetector(
                                         onTap: () {
-                                          if (widget.onRemoveFromCart != null) widget.onRemoveFromCart!(index);
+                                          if (widget.onRemoveFromCart != null)
+                                            widget.onRemoveFromCart!(index);
                                         },
-                                        child: const Icon(Icons.delete_outline, color: Colors.grey, size: 20),
-                                      )
+                                        child: const Icon(
+                                          Icons.delete_outline,
+                                          color: Colors.grey,
+                                          size: 20,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   const SizedBox(height: 6),
-                                  if (item["extras"] != null && item["extras"] is List && (item["extras"] as List).isNotEmpty)
+                                  if (item["extras"] != null &&
+                                      item["extras"] is List &&
+                                      (item["extras"] as List).isNotEmpty)
                                     Wrap(
                                       spacing: 6,
                                       runSpacing: 6,
-                                      children: (item["extras"] as List).map((extra) => _buildTag(extra.toString())).toList(),
+                                      children: (item["extras"] as List)
+                                          .map(
+                                            (extra) =>
+                                                _buildTag(extra.toString()),
+                                          )
+                                          .toList(),
                                     )
                                   else
                                     const SizedBox.shrink(),
                                   const SizedBox(height: 12),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text("${item["price"]} TL", style: TextStyle(color: widget.primaryColor, fontWeight: FontWeight.bold, fontSize: 15)),
-                                          if (item.containsKey("rawCustomization")) ...[
+                                          Text(
+                                            "${item["price"]} TL",
+                                            style: TextStyle(
+                                              color: widget.primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          if (item.containsKey(
+                                            "rawCustomization",
+                                          )) ...[
                                             const SizedBox(height: 6),
                                             GestureDetector(
                                               onTap: () {
-                                                if (widget.onEditItem != null) widget.onEditItem!(index);
+                                                if (widget.onEditItem != null)
+                                                  widget.onEditItem!(index);
                                               },
                                               child: Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 4,
+                                                    ),
                                                 decoration: BoxDecoration(
                                                   color: Colors.amber.shade100,
-                                                  borderRadius: BorderRadius.circular(6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
                                                 ),
                                                 child: Row(
                                                   children: [
-                                                    Icon(Icons.edit, size: 12, color: widget.primaryColor),
+                                                    Icon(
+                                                      Icons.edit,
+                                                      size: 12,
+                                                      color:
+                                                          widget.primaryColor,
+                                                    ),
                                                     const SizedBox(width: 4),
-                                                    Text("Edit", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: widget.primaryColor))
+                                                    Text(
+                                                      "Edit",
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            widget.primaryColor,
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -301,24 +437,70 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                         ],
                                       ),
                                       Container(
-                                        decoration: BoxDecoration(color: Colors.grey.shade50, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade200)),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.shade50,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          border: Border.all(
+                                            color: Colors.grey.shade200,
+                                          ),
+                                        ),
                                         child: Row(
                                           children: [
-                                            InkWell(onTap: () {
-                                              if (widget.onDecreaseQuantity != null) widget.onDecreaseQuantity!(index);
-                                            }, child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6), child: Icon(Icons.remove, size: 16))),
-                                            Text("$qty", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                                            InkWell(onTap: () {
-                                              if (widget.onIncreaseQuantity != null) widget.onIncreaseQuantity!(index);
-                                            }, child: const Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6), child: Icon(Icons.add, size: 16))),
+                                            InkWell(
+                                              onTap: () {
+                                                if (widget.onDecreaseQuantity !=
+                                                    null)
+                                                  widget.onDecreaseQuantity!(
+                                                    index,
+                                                  );
+                                              },
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 6,
+                                                ),
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  size: 16,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              "$qty",
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                if (widget.onIncreaseQuantity !=
+                                                    null)
+                                                  widget.onIncreaseQuantity!(
+                                                    index,
+                                                  );
+                                              },
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 6,
+                                                ),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: 16,
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       );
@@ -329,55 +511,104 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                   // İNDİRİM KUPONU ALANI
                   if (widget.isCouponApplied)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.green.shade50,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.green.shade400, width: 1.5),
+                        border: Border.all(
+                          color: Colors.green.shade400,
+                          width: 1.5,
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.local_offer, color: Colors.green, size: 20),
+                          const Icon(
+                            Icons.local_offer,
+                            color: Colors.green,
+                            size: 20,
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("${widget.appliedDiscountPercentage}% Discount (-${widget.couponDiscountAmount.toStringAsFixed(2)} TL)", style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 14)),
-                                Text("${widget.appliedCouponCode} coupon applied.", style: const TextStyle(color: Colors.green, fontSize: 11)),
+                                Text(
+                                  "${widget.appliedDiscountPercentage}% Discount (-${widget.couponDiscountAmount.toStringAsFixed(2)} TL)",
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                Text(
+                                  "${widget.appliedCouponCode} coupon applied.",
+                                  style: const TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 11,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              if (widget.onRemoveCoupon != null) widget.onRemoveCoupon!();
+                              if (widget.onRemoveCoupon != null)
+                                widget.onRemoveCoupon!();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               foregroundColor: Colors.red,
                               elevation: 0,
                               side: BorderSide(color: Colors.red.shade200),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
                               minimumSize: Size.zero,
                             ),
-                            child: const Text("Remove", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                          )
+                            child: const Text(
+                              "Remove",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
                   else
                     Container(
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade200)),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.grey.shade200),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Row(
                             children: [
-                              Icon(Icons.local_offer_outlined, color: Colors.amber, size: 18),
+                              Icon(
+                                Icons.local_offer_outlined,
+                                color: Colors.amber,
+                                size: 18,
+                              ),
                               SizedBox(width: 8),
-                              Text("Discount Coupon", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text(
+                                "Discount Coupon",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
@@ -388,76 +619,151 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                   controller: couponController,
                                   decoration: InputDecoration(
                                     hintText: "Coupon Code",
-                                    hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 12),
-                                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey.shade400,
+                                      fontSize: 12,
+                                    ),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 12,
+                                    ),
                                     isDense: true,
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade200)),
-                                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey.shade200)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(
+                                        color: Colors.grey.shade200,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 8),
                               ElevatedButton(
-                                onPressed: widget.cartItems.isEmpty ? null : () {
-                                  final code = couponController.text.trim();
-                                  if (code.isNotEmpty && widget.onApplyCoupon != null) {
-                                    widget.onApplyCoupon!(code);
-                                  }
-                                },
+                                onPressed: widget.cartItems.isEmpty
+                                    ? null
+                                    : () {
+                                        final code = couponController.text
+                                            .trim();
+                                        if (code.isNotEmpty &&
+                                            widget.onApplyCoupon != null) {
+                                          widget.onApplyCoupon!(code);
+                                        }
+                                      },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: widget.primaryColor,
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
-                                child: const Text("Apply", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                              )
+                                child: const Text(
+                                  "Apply",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
-                  
+
                   const SizedBox(height: 16),
 
                   // MOKA SADAKAT PUANI KARTI (Sidebar ile senkronize)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFDF8F0),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.amber.shade300, width: 1.5),
+                      border: Border.all(
+                        color: Colors.amber.shade300,
+                        width: 1.5,
+                      ),
                     ),
                     child: Row(
                       children: [
                         Container(
                           padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(color: Colors.orange.shade100, shape: BoxShape.circle),
-                          child: Icon(Icons.card_giftcard, color: Colors.orange.shade700, size: 22),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.shade100,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.card_giftcard,
+                            color: Colors.orange.shade700,
+                            size: 22,
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Moka Loyalty Points", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: widget.primaryColor)),
-                              Text("Available: ${widget.totalMokaPoints.toInt()} Points (=${widget.totalMokaPoints.toInt()} TL)", style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                              Text(
+                                "Moka Loyalty Points",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: widget.primaryColor,
+                                ),
+                              ),
+                              Text(
+                                "Available: ${widget.totalMokaPoints.toInt()} Points (=${widget.totalMokaPoints.toInt()} TL)",
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ],
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: widget.cartItems.isEmpty ? null : () {
-                            if (widget.onTogglePoints != null) widget.onTogglePoints!();
-                          },
+                          onPressed: widget.cartItems.isEmpty
+                              ? null
+                              : () {
+                                  if (widget.onTogglePoints != null)
+                                    widget.onTogglePoints!();
+                                },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: widget.isPointsApplied ? Colors.grey.shade200 : Colors.white,
-                            foregroundColor: widget.isPointsApplied ? Colors.red : widget.primaryColor,
+                            backgroundColor: widget.isPointsApplied
+                                ? Colors.grey.shade200
+                                : Colors.white,
+                            foregroundColor: widget.isPointsApplied
+                                ? Colors.red
+                                : widget.primaryColor,
                             elevation: 0,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                             minimumSize: Size.zero,
                           ),
-                          child: Text(widget.isPointsApplied ? "Cancel" : "Use Points", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                        )
+                          child: Text(
+                            widget.isPointsApplied ? "Cancel" : "Use Points",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -470,15 +776,27 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -4))],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, -4),
+                ),
+              ],
             ),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Subtotal", style: TextStyle(color: Colors.grey, fontSize: 13)),
-                    Text("${widget.subtotal.toStringAsFixed(2)} TL", style: const TextStyle(color: Colors.grey, fontSize: 13)),
+                    const Text(
+                      "Subtotal",
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
+                    Text(
+                      "${widget.subtotal.toStringAsFixed(2)} TL",
+                      style: const TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
                   ],
                 ),
                 if (widget.isCouponApplied)
@@ -487,8 +805,20 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Discount (${widget.appliedDiscountPercentage}%)", style: const TextStyle(color: Colors.green, fontSize: 13)),
-                        Text("-${widget.couponDiscountAmount.toStringAsFixed(2)} TL", style: const TextStyle(color: Colors.green, fontSize: 13)),
+                        Text(
+                          "Discount (${widget.appliedDiscountPercentage}%)",
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontSize: 13,
+                          ),
+                        ),
+                        Text(
+                          "-${widget.couponDiscountAmount.toStringAsFixed(2)} TL",
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontSize: 13,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -498,8 +828,17 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("Used Points", style: TextStyle(color: Colors.orange, fontSize: 13)),
-                        Text("-${widget.usedPointsAmount.toStringAsFixed(2)} TL", style: const TextStyle(color: Colors.orange, fontSize: 13)),
+                        const Text(
+                          "Used Points",
+                          style: TextStyle(color: Colors.orange, fontSize: 13),
+                        ),
+                        Text(
+                          "-${widget.usedPointsAmount.toStringAsFixed(2)} TL",
+                          style: const TextStyle(
+                            color: Colors.orange,
+                            fontSize: 13,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -507,36 +846,64 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Total Amount", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                    Text("${widget.finalTotalPrice.toStringAsFixed(2)} TL", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: widget.primaryColor)),
+                    const Text(
+                      "Total Amount",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      "${widget.finalTotalPrice.toStringAsFixed(2)} TL",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: widget.primaryColor,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: widget.cartItems.isEmpty ? null : () {
-                      if (widget.onCheckout != null) widget.onCheckout!();
-                    },
+                    onPressed: widget.cartItems.isEmpty
+                        ? null
+                        : () {
+                            if (widget.onCheckout != null) widget.onCheckout!();
+                          },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: widget.primaryColor,
                       disabledBackgroundColor: Colors.grey.shade300,
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Confirm Order", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(
+                          "Confirm Order",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
                         SizedBox(width: 8),
-                        Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -550,7 +917,14 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: Colors.grey.shade300),
       ),
-      child: Text(text, style: TextStyle(color: Colors.grey.shade700, fontSize: 10, fontWeight: FontWeight.bold)),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey.shade700,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

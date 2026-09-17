@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart' hide CarouselController;
 import 'package:carousel_slider/carousel_slider.dart';
 
+/// A carousel widget for displaying promotional banners.
 class BannerCarouselWidget extends StatefulWidget {
+  /// The list of banners to display. Each banner should be a map.
   final List<Map<String, dynamic>> banners;
+
+  /// The color of the active indicator dot.
   final Color indicatorActiveColor;
+
+  /// The color of the inactive indicator dots.
   final Color indicatorInactiveColor;
+
+  /// The height of the carousel.
   final double height;
+
+  /// The interval between automatic page transitions.
   final Duration autoPlayInterval;
 
+  /// Creates a new [BannerCarouselWidget].
   const BannerCarouselWidget({
-    super.key,
+    Key? key,
     required this.banners,
     this.indicatorActiveColor = const Color(0xFF6B4E3D),
     this.indicatorInactiveColor = const Color(0xFFE0E0E0),
     this.height = 180,
     this.autoPlayInterval = const Duration(seconds: 4),
-  });
+  }) : super(key: key);
 
   @override
   State<BannerCarouselWidget> createState() => _BannerCarouselWidgetState();
@@ -50,7 +61,7 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
             final banner = widget.banners[index];
             final imageUrl = banner["imageUrl"] ?? "";
             final tagColor = banner["tagColor"] ?? widget.indicatorActiveColor;
-            
+
             return Container(
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -78,27 +89,43 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (banner["tagText"] != null && banner["tagText"].toString().isNotEmpty)
+                    if (banner["tagText"] != null &&
+                        banner["tagText"].toString().isNotEmpty)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: tagColor,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           banner["tagText"],
-                          style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     const SizedBox(height: 8),
                     Text(
                       banner["title"] ?? "",
-                      style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, height: 1.2),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       banner["subtitle"] ?? "",
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -118,12 +145,14 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
                 margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: _currentIndex == entry.key ? widget.indicatorActiveColor : widget.indicatorInactiveColor,
+                  color: _currentIndex == entry.key
+                      ? widget.indicatorActiveColor
+                      : widget.indicatorInactiveColor,
                 ),
               );
             }).toList(),
           ),
-        ]
+        ],
       ],
     );
   }

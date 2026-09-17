@@ -69,27 +69,42 @@ class CustomHeader extends StatelessWidget {
                   Flexible(
                     child: Text(
                       title,
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, height: 1.1),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        height: 1.1,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   if (subtitle.isNotEmpty) ...[
                     const SizedBox(width: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: accentColor.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(4),
                         border: Border.all(color: accentColor, width: 0.5),
                       ),
-                      child: Text(subtitle, style: TextStyle(color: accentColor, fontSize: 9, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        subtitle,
+                        style: TextStyle(
+                          color: accentColor,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ]
+                  ],
                 ],
               ),
             ),
             const SizedBox(width: 8),
-            
+
             // Masa QR Butonu
             GestureDetector(
               onTap: onQrTap,
@@ -98,27 +113,36 @@ class CustomHeader extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.2),
+                  ),
                 ),
                 child: Row(
                   children: [
                     Icon(Icons.qr_code_scanner, color: accentColor, size: 14),
                     const SizedBox(width: 4),
-                    Text(activeTable, style: const TextStyle(color: Colors.white, fontSize: 11)),
+                    Text(
+                      activeTable,
+                      style: const TextStyle(color: Colors.white, fontSize: 11),
+                    ),
                   ],
                 ),
               ),
             ),
             const SizedBox(width: 8),
-            
+
             // Bildirim Zili
             GestureDetector(
               onTap: onNotificationTap,
-              child: const Icon(Icons.notifications_outlined, color: Colors.white, size: 24),
+              child: const Icon(
+                Icons.notifications_outlined,
+                color: Colors.white,
+                size: 24,
+              ),
             ),
             const SizedBox(width: 8),
-            
-            // Sepet Butonu 
+
+            // Sepet Butonu
             GestureDetector(
               onTap: onCartTap,
               child: Container(
@@ -131,7 +155,11 @@ class CustomHeader extends StatelessWidget {
                   isLabelVisible: totalItemCount > 0,
                   label: Text('$totalItemCount'),
                   backgroundColor: badgeColor,
-                  child: Icon(Icons.shopping_bag_outlined, color: accentColor, size: 20),
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: accentColor,
+                    size: 20,
+                  ),
                 ),
               ),
             ),

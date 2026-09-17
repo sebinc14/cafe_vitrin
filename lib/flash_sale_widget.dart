@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class FlashSaleWidget extends StatefulWidget {
@@ -83,7 +84,10 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: widget.accentColor.withValues(alpha: 0.4), width: 1.5),
+          border: Border.all(
+            color: widget.accentColor.withValues(alpha: 0.4),
+            width: 1.5,
+          ),
         ),
         child: Column(
           children: [
@@ -98,20 +102,39 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                       color: widget.flashIconColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(Icons.local_fire_department, color: widget.flashIconColor, size: 24),
+                    child: Icon(
+                      Icons.local_fire_department,
+                      color: widget.flashIconColor,
+                      size: 24,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                        Text(widget.subtitle, style: const TextStyle(color: Colors.grey, fontSize: 11)),
+                        Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          widget.subtitle,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 11,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -119,15 +142,23 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.access_time, color: widget.timerColor, size: 14),
+                        Icon(
+                          Icons.access_time,
+                          color: widget.timerColor,
+                          size: 14,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           _formatDuration(_duration),
-                          style: TextStyle(color: widget.timerColor, fontWeight: FontWeight.bold, fontSize: 12),
+                          style: TextStyle(
+                            color: widget.timerColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -144,22 +175,31 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                   final String title = data['name'] ?? '';
                   final double oldPrice = (data['oldPrice'] ?? 0).toDouble();
                   final double newPrice = (data['price'] ?? 0).toDouble();
-                  final double discount = (data['discountPercentage'] ?? 0).toDouble();
+                  final double discount = (data['discountPercentage'] ?? 0)
+                      .toDouble();
                   final String image = data['imageUrl'] ?? '';
                   final bool isFavorite = data['isFavorite'] == true;
 
                   return GestureDetector(
                     onTap: () {
-                      if (widget.onProductTap != null) widget.onProductTap!(data);
+                      if (widget.onProductTap != null)
+                        widget.onProductTap!(data);
                     },
                     child: Container(
                       width: 130,
-                      margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 4))
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.04),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
                         ],
                         border: Border.all(color: Colors.grey.shade100),
                       ),
@@ -171,24 +211,55 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                             child: Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(12),
+                                  ),
                                   child: image.isNotEmpty
-                                    ? Image.network(
-                                        image, 
-                                        width: double.infinity, 
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_, _, _) => Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
-                                      )
-                                    : Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
+                                      ? Image.network(
+                                          image,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (_, _, _) => Container(
+                                            color: Colors.grey.shade200,
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          color: Colors.grey.shade200,
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.image,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
                                 ),
                                 if (discount > 0)
                                   Positioned(
                                     top: 6,
                                     left: 6,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                      decoration: BoxDecoration(color: widget.discountBadgeColor, borderRadius: BorderRadius.circular(4)),
-                                      child: Text("${discount.toInt()}% Off", style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: widget.discountBadgeColor,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(
+                                        "${discount.toInt()}% Off",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 Positioned(
@@ -196,15 +267,20 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                                   right: 6,
                                   child: GestureDetector(
                                     onTap: () {
-                                      if (widget.onFavoriteToggle != null) widget.onFavoriteToggle!(data);
+                                      if (widget.onFavoriteToggle != null)
+                                        widget.onFavoriteToggle!(data);
                                     },
                                     child: Icon(
-                                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                                      color: isFavorite ? widget.discountBadgeColor : Colors.white,
+                                      isFavorite
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: isFavorite
+                                          ? widget.discountBadgeColor
+                                          : Colors.white,
                                       size: 18,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -214,41 +290,75 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                Text(
+                                  title,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(height: 4),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text("${oldPrice.toStringAsFixed(2)} TL", style: const TextStyle(color: Colors.grey, fontSize: 9, decoration: TextDecoration.lineThrough)),
-                                        Text("${newPrice.toStringAsFixed(2)} TL", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                        Text(
+                                          "${oldPrice.toStringAsFixed(2)} TL",
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 9,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${newPrice.toStringAsFixed(2)} TL",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     // + BUTONUNA TIKLANINCA
                                     GestureDetector(
                                       onTap: () {
-                                        if (widget.onAddToCart != null) widget.onAddToCart!(data);
+                                        if (widget.onAddToCart != null)
+                                          widget.onAddToCart!(data);
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.all(4),
-                                        decoration: BoxDecoration(color: widget.primaryColor, borderRadius: BorderRadius.circular(8)),
-                                        child: const Icon(Icons.add, color: Colors.white, size: 16),
+                                        decoration: BoxDecoration(
+                                          color: widget.primaryColor,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

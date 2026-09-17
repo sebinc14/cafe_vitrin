@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 
+/// A modal that displays an animated rating system for an order.
 class AnimatedRatingModal extends StatefulWidget {
+  /// The ID of the order being rated.
   final String orderId;
+
+  /// The list of items in the order.
   final List<dynamic> orderItems;
+
+  /// The primary color used for UI elements.
   final Color primaryColor;
+
+  /// The title displayed at the top of the modal.
   final String title;
+
+  /// The subtitle displayed below the title.
   final String subtitle;
+
+  /// The hint text shown in the comment text field.
   final String hintText;
+
+  /// The text displayed on the submit button.
   final String submitButtonText;
+
+  /// The message shown upon successful submission.
   final String successMessage;
+
+  /// The color of the rating stars.
   final Color starColor;
+
+  /// Callback triggered when the user submits their rating and comment.
   final Function(int rating, String comment)? onSubmit;
 
+  /// Creates a new [AnimatedRatingModal].
   const AnimatedRatingModal({
-    super.key,
+    Key? key,
     required this.orderId,
     required this.orderItems,
     this.primaryColor = const Color(0xFF6B4E3D),
@@ -24,11 +45,12 @@ class AnimatedRatingModal extends StatefulWidget {
     this.submitButtonText = "Submit",
     this.successMessage = "Thank you for your feedback!",
     this.onSubmit,
-  });
+  }) : super(key: key);
 
+  /// Shows the [AnimatedRatingModal] as a bottom sheet.
   static Future<void> show(
-    BuildContext context, 
-    String orderId, 
+    BuildContext context,
+    String orderId,
     List<dynamic> orderItems, {
     Color primaryColor = const Color(0xFF6B4E3D),
     Color starColor = Colors.amber,
@@ -39,9 +61,11 @@ class AnimatedRatingModal extends StatefulWidget {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
         child: AnimatedRatingModal(
-          orderId: orderId, 
+          orderId: orderId,
           orderItems: orderItems,
           primaryColor: primaryColor,
           starColor: starColor,
@@ -68,15 +92,15 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
 
   Future<void> _submit() async {
     setState(() => _isSubmitting = true);
-    
+
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
-    
+
     if (mounted) {
       if (widget.onSubmit != null) {
         widget.onSubmit!(_currentRating, _commentController.text);
       }
-      
+
       setState(() => _isSubmitting = false);
       Navigator.pop(context);
     }
@@ -102,7 +126,7 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
             ),
           ),
           const SizedBox(height: 24),
-          
+
           Text(
             widget.title,
             style: TextStyle(
@@ -111,16 +135,16 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
               color: widget.primaryColor,
             ),
           ),
-          
+
           const SizedBox(height: 8),
           Text(
             widget.subtitle,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
           ),
-          
+
           const SizedBox(height: 32),
-          
+
           // Yıldızlar
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +155,9 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Icon(
-                    starIndex <= _currentRating ? Icons.star_rounded : Icons.star_outline_rounded,
+                    starIndex <= _currentRating
+                        ? Icons.star_rounded
+                        : Icons.star_outline_rounded,
                     color: widget.starColor,
                     size: 48,
                   ),
@@ -139,9 +165,9 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
               );
             }),
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Yorum Alanı
           TextField(
             controller: _commentController,
@@ -161,9 +187,9 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Gönder Butonu
           SizedBox(
             width: double.infinity,
@@ -181,7 +207,10 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
                   ? const SizedBox(
                       width: 24,
                       height: 24,
-                      child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2,
+                      ),
                     )
                   : Text(
                       widget.submitButtonText,
@@ -193,7 +222,7 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
                     ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
         ],
       ),

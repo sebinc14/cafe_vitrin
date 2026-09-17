@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'dart:math';
 
 class Prize {
@@ -50,7 +51,9 @@ class _GamificationWidgetState extends State<GamificationWidget> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           child: _SpinWheelDialog(
@@ -108,10 +111,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
-              colors: [
-                widget.gradientStartColor,
-                widget.gradientEndColor,
-              ],
+              colors: [widget.gradientStartColor, widget.gradientEndColor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -120,7 +120,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
                 color: widget.gradientEndColor.withValues(alpha: 0.3),
                 blurRadius: 15,
                 offset: const Offset(0, 8),
-              )
+              ),
             ],
           ),
           child: Stack(
@@ -128,7 +128,11 @@ class _GamificationWidgetState extends State<GamificationWidget> {
               Positioned(
                 right: -20,
                 top: -20,
-                child: Icon(Icons.incomplete_circle, size: 120, color: Colors.white.withValues(alpha: 0.1)),
+                child: Icon(
+                  Icons.incomplete_circle,
+                  size: 120,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -140,13 +144,16 @@ class _GamificationWidgetState extends State<GamificationWidget> {
                         color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
-                      child: _isLoading 
-                        ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                        : Icon(
-                            iconData,
-                            color: Colors.white,
-                            size: 36,
-                          ),
+                      child: _isLoading
+                          ? const SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Icon(iconData, color: Colors.white, size: 36),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -174,7 +181,11 @@ class _GamificationWidgetState extends State<GamificationWidget> {
                       ),
                     ),
                     if (!_hasSpun && !_isLoading || _hasActivePrize)
-                      const Icon(Icons.arrow_forward_ios, color: Colors.white70, size: 16),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white70,
+                        size: 16,
+                      ),
                   ],
                 ),
               ),
@@ -192,13 +203,19 @@ class _SpinWheelDialog extends StatefulWidget {
   final Function(Prize) onRedeem;
   final Prize? initialWonPrize;
 
-  const _SpinWheelDialog({required this.prizes, required this.onWin, required this.onRedeem, this.initialWonPrize});
+  const _SpinWheelDialog({
+    required this.prizes,
+    required this.onWin,
+    required this.onRedeem,
+    this.initialWonPrize,
+  });
 
   @override
   State<_SpinWheelDialog> createState() => _SpinWheelDialogState();
 }
 
-class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerProviderStateMixin {
+class _SpinWheelDialogState extends State<_SpinWheelDialog>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isSpinning = false;
@@ -250,7 +267,7 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
     double sliceCenterAngle = winIndex * 60.0 + 30.0;
     double offsetAngle = 270.0 - sliceCenterAngle;
     if (offsetAngle < 0) offsetAngle += 360.0;
-    
+
     double randomJitter = (Random().nextDouble() * 40) - 20;
     offsetAngle += randomJitter;
 
@@ -260,10 +277,7 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
     _animation = Tween<double>(
       begin: 0,
       end: totalTurns,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCirc,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCirc));
 
     _controller.forward(from: 0.0);
   }
@@ -272,7 +286,10 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
     if (_wonPrize.actionType == 'none') {
       return Column(
         children: [
-          const Text("Unfortunately, you missed this time.", style: TextStyle(fontSize: 14)),
+          const Text(
+            "Unfortunately, you missed this time.",
+            style: TextStyle(fontSize: 14),
+          ),
           const SizedBox(height: 24),
           _buildCloseButton("Close"),
         ],
@@ -291,7 +308,12 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
             ),
             child: Text(
               _wonPrize.actionData.toString(),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 2, color: Colors.orange),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+                color: Colors.orange,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -299,11 +321,16 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
             width: double.infinity,
             child: ElevatedButton.icon(
               icon: const Icon(Icons.check_circle, color: Colors.white),
-              label: const Text("Apply Discount to Cart", style: TextStyle(color: Colors.white, fontSize: 16)),
+              label: const Text(
+                "Apply Discount to Cart",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF6B4E3D),
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               onPressed: () {
                 widget.onRedeem(_wonPrize);
@@ -333,7 +360,11 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
                 Expanded(
                   child: Text(
                     _wonPrize.title,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -346,11 +377,16 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
             width: double.infinity,
             child: ElevatedButton.icon(
               icon: const Icon(Icons.shopping_cart, color: Colors.white),
-              label: const Text("Add to Cart for Free", style: TextStyle(color: Colors.white, fontSize: 16)),
+              label: const Text(
+                "Add to Cart for Free",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.shade700,
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               onPressed: () {
                 widget.onRedeem(_wonPrize);
@@ -372,12 +408,21 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF6B4E3D),
           padding: const EdgeInsets.symmetric(vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: Text(text, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -387,13 +432,19 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
     if (widget.prizes.isEmpty) {
       return const SizedBox.shrink();
     }
-    
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 20, offset: Offset(0, 10))],
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 20,
+            offset: Offset(0, 10),
+          ),
+        ],
       ),
       child: Stack(
         clipBehavior: Clip.none,
@@ -403,7 +454,11 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
             children: [
               const Text(
                 "Wheel of Fortune",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF6B4E3D)),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF6B4E3D),
+                ),
               ),
               const SizedBox(height: 24),
 
@@ -419,15 +474,30 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
                           width: 220,
                           height: 220,
                           child: CustomPaint(
-                            painter: _WheelPainter(widget.prizes.map((p) => p.color).toList()),
+                            painter: _WheelPainter(
+                              widget.prizes.map((p) => p.color).toList(),
+                            ),
                             child: Stack(
-                              children: List.generate(widget.prizes.length, (index) {
-                                double angle = (index * (360 / widget.prizes.length) + (180 / widget.prizes.length)) * pi / 180;
+                              children: List.generate(widget.prizes.length, (
+                                index,
+                              ) {
+                                double angle =
+                                    (index * (360 / widget.prizes.length) +
+                                        (180 / widget.prizes.length)) *
+                                    pi /
+                                    180;
                                 return Align(
-                                  alignment: Alignment(cos(angle) * 0.6, sin(angle) * 0.6),
+                                  alignment: Alignment(
+                                    cos(angle) * 0.6,
+                                    sin(angle) * 0.6,
+                                  ),
                                   child: Transform.rotate(
-                                    angle: angle + pi / 2, 
-                                    child: Icon(widget.prizes[index].icon, color: Colors.white, size: 24),
+                                    angle: angle + pi / 2,
+                                    child: Icon(
+                                      widget.prizes[index].icon,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
                                   ),
                                 );
                               }),
@@ -436,7 +506,11 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
                         ),
                       ),
                     ),
-                    const Icon(Icons.arrow_drop_down, size: 48, color: Color(0xFF6B4E3D)),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                      size: 48,
+                      color: Color(0xFF6B4E3D),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 32),
@@ -444,14 +518,22 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _isSpinning ? Colors.grey : const Color(0xFF6B4E3D),
+                      backgroundColor: _isSpinning
+                          ? Colors.grey
+                          : const Color(0xFF6B4E3D),
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     onPressed: _isSpinning ? null : _spin,
                     child: Text(
                       _isSpinning ? "Spinning..." : "Spin!",
-                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -459,20 +541,28 @@ class _SpinWheelDialogState extends State<_SpinWheelDialog> with SingleTickerPro
                 Icon(_wonPrize.icon, color: _wonPrize.color, size: 60),
                 const SizedBox(height: 16),
                 Text(
-                  _wonPrize.actionType == 'none' ? "Better Luck Next Time!" : "Congratulations!",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: _wonPrize.actionType == 'none' ? Colors.grey : Colors.green),
+                  _wonPrize.actionType == 'none'
+                      ? "Better Luck Next Time!"
+                      : "Congratulations!",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: _wonPrize.actionType == 'none'
+                        ? Colors.grey
+                        : Colors.green,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  _wonPrize.actionType == 'none' 
-                    ? "You might be luckier next time." 
-                    : "${_wonPrize.title} won!",
+                  _wonPrize.actionType == 'none'
+                      ? "You might be luckier next time."
+                      : "${_wonPrize.title} won!",
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 16, color: Colors.black87),
                 ),
                 const SizedBox(height: 24),
                 _buildActionArea(),
-              ]
+              ],
             ],
           ),
           Positioned(
@@ -511,16 +601,25 @@ class _WheelPainter extends CustomPainter {
       canvas.drawArc(rect, i * sweepAngle, sweepAngle, true, paint);
       paint.style = PaintingStyle.fill;
     }
-    
+
     paint.color = Colors.white;
     canvas.drawCircle(Offset(size.width / 2, size.height / 2), 20, paint);
-    
+
     final textPainter = TextPainter(
-      text: const TextSpan(text: "★", style: TextStyle(color: Colors.amber, fontSize: 24)),
+      text: const TextSpan(
+        text: "★",
+        style: TextStyle(color: Colors.amber, fontSize: 24),
+      ),
       textDirection: TextDirection.ltr,
     );
     textPainter.layout();
-    textPainter.paint(canvas, Offset(size.width / 2 - textPainter.width / 2, size.height / 2 - textPainter.height / 2));
+    textPainter.paint(
+      canvas,
+      Offset(
+        size.width / 2 - textPainter.width / 2,
+        size.height / 2 - textPainter.height / 2,
+      ),
+    );
   }
 
   @override

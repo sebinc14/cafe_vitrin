@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 
+/// A floating action button alternative designed for calling a waiter.
 class FloatingCallWaiterWidget extends StatelessWidget {
+  /// The active table number or name.
   final String activeTable;
+
+  /// The text displayed on the button.
   final String buttonText;
+
+  /// The background color of the container.
   final Color backgroundColor;
+
+  /// The primary color of the button.
   final Color primaryColor;
+
+  /// The accent color used for icons and text.
   final Color accentColor;
+
+  /// The background color for the table badge.
   final Color badgeColor;
+
+  /// Callback triggered when the button is pressed.
   final VoidCallback? onCallWaiter;
 
+  /// Creates a new [FloatingCallWaiterWidget].
   const FloatingCallWaiterWidget({
-    super.key,
+    Key? key,
     this.activeTable = "Table",
     this.buttonText = "Call Waiter",
     this.backgroundColor = const Color(0xFFF9F9F9),
@@ -18,7 +33,7 @@ class FloatingCallWaiterWidget extends StatelessWidget {
     this.accentColor = Colors.amber,
     this.badgeColor = const Color(0xFF4E342E),
     this.onCallWaiter,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +83,10 @@ class FloatingCallWaiterWidget extends StatelessWidget {
               const SizedBox(width: 12),
               // Masa Numarası Rozeti
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: badgeColor,
                   borderRadius: BorderRadius.circular(10),
