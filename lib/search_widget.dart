@@ -12,7 +12,7 @@ class SearchWidget extends StatefulWidget {
   final Function(Map<String, dynamic> product)? onAddToCart;
 
   const SearchWidget({
-    Key? key,
+    super.key,
     required this.products,
     this.hintText = "Search for coffee, dessert or snacks...",
     this.primaryColor = const Color(0xFF6B4E3D),
@@ -20,7 +20,7 @@ class SearchWidget extends StatefulWidget {
     this.darkColor = const Color(0xFF4E342E),
     this.onProductTap,
     this.onAddToCart,
-  }) : super(key: key);
+  });
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -47,7 +47,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4))
+                BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 4))
               ],
             ),
             child: TextField(
@@ -74,7 +74,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 10, offset: const Offset(0, 4))
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 10, offset: const Offset(0, 4))
                 ],
                 border: Border.all(color: Colors.grey.shade200),
               ),

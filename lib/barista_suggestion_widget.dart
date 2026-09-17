@@ -21,7 +21,7 @@ class BaristaSuggestionWidget extends StatelessWidget {
   final VoidCallback? onAddToCart;
 
   const BaristaSuggestionWidget({
-    Key? key,
+    super.key,
     this.sectionTitle = "Barista's Pick of the Day",
     required this.productName,
     required this.description,
@@ -38,7 +38,7 @@ class BaristaSuggestionWidget extends StatelessWidget {
     this.onTap,
     this.onFavoriteToggle,
     this.onAddToCart,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-library cafe_vitrin;
+library;
 
 export 'animated_rating_modal.dart';
 export 'banner_carousel_widget.dart';

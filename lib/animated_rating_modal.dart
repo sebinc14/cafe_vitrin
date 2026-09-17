@@ -13,7 +13,7 @@ class AnimatedRatingModal extends StatefulWidget {
   final Function(int rating, String comment)? onSubmit;
 
   const AnimatedRatingModal({
-    Key? key,
+    super.key,
     required this.orderId,
     required this.orderItems,
     this.primaryColor = const Color(0xFF6B4E3D),
@@ -24,7 +24,7 @@ class AnimatedRatingModal extends StatefulWidget {
     this.submitButtonText = "Submit",
     this.successMessage = "Thank you for your feedback!",
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   static Future<void> show(
     BuildContext context, 

@@ -10,7 +10,7 @@ class FloatingCallWaiterWidget extends StatelessWidget {
   final VoidCallback? onCallWaiter;
 
   const FloatingCallWaiterWidget({
-    Key? key,
+    super.key,
     this.activeTable = "Table",
     this.buttonText = "Call Waiter",
     this.backgroundColor = const Color(0xFFF9F9F9),
@@ -18,7 +18,7 @@ class FloatingCallWaiterWidget extends StatelessWidget {
     this.accentColor = Colors.amber,
     this.badgeColor = const Color(0xFF4E342E),
     this.onCallWaiter,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class FloatingCallWaiterWidget extends StatelessWidget {
         color: backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),

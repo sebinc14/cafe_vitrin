@@ -22,7 +22,7 @@ class GamificationWidget extends StatefulWidget {
   final Color gradientEndColor;
 
   const GamificationWidget({
-    Key? key,
+    super.key,
     required this.prizes,
     this.onPrizeWon,
     this.onPrizeRedeemed,
@@ -30,14 +30,14 @@ class GamificationWidget extends StatefulWidget {
     this.subtitleText = "Spin the wheel, catch surprise discounts!",
     this.gradientStartColor = const Color(0xFF6B4E3D),
     this.gradientEndColor = Colors.amber,
-  }) : super(key: key);
+  });
 
   @override
   State<GamificationWidget> createState() => _GamificationWidgetState();
 }
 
 class _GamificationWidgetState extends State<GamificationWidget> {
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool _hasSpun = false;
   bool _hasActivePrize = false;
   Prize? _activePrize;
@@ -117,7 +117,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
             ),
             boxShadow: [
               BoxShadow(
-                color: widget.gradientEndColor.withOpacity(0.3),
+                color: widget.gradientEndColor.withValues(alpha: 0.3),
                 blurRadius: 15,
                 offset: const Offset(0, 8),
               )
@@ -128,7 +128,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
               Positioned(
                 right: -20,
                 top: -20,
-                child: Icon(Icons.incomplete_circle, size: 120, color: Colors.white.withOpacity(0.1)),
+                child: Icon(Icons.incomplete_circle, size: 120, color: Colors.white.withValues(alpha: 0.1)),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -137,7 +137,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: _isLoading 
@@ -166,7 +166,7 @@ class _GamificationWidgetState extends State<GamificationWidget> {
                           Text(
                             currentSubtitle,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               fontSize: 13,
                             ),
                           ),

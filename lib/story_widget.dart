@@ -7,12 +7,12 @@ class StoryWidget extends StatelessWidget {
   final Color liveColor;
 
   const StoryWidget({
-    Key? key,
+    super.key,
     required this.stories,
     this.primaryColor = const Color(0xFF6B4E3D),
     this.accentColor = Colors.amber,
     this.liveColor = Colors.red,
-  }) : super(key: key);
+  });
 
   void _showStory(BuildContext context, int initialIndex) {
     showGeneralDialog(
@@ -84,7 +84,7 @@ class StoryWidget extends StatelessWidget {
                       CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(story["image"] ?? ""),
-                        onBackgroundImageError: (_, __) {},
+                        onBackgroundImageError: (_, _) {},
                         backgroundColor: Colors.grey.shade200,
                       ),
                       if (isLive)
@@ -227,7 +227,7 @@ class _StoryViewerState extends State<_StoryViewer> {
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: 3,
                       decoration: BoxDecoration(
-                        color: index == _currentIndex ? Colors.white : Colors.white.withOpacity(0.3),
+                        color: index == _currentIndex ? Colors.white : Colors.white.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -248,7 +248,7 @@ class _StoryViewerState extends State<_StoryViewer> {
                     children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(widget.stories[_currentIndex]["image"] ?? ""),
-                        onBackgroundImageError: (_, __) {},
+                        onBackgroundImageError: (_, _) {},
                         radius: 18,
                         backgroundColor: Colors.grey.shade800,
                       ),

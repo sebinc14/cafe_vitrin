@@ -14,7 +14,7 @@ class ReviewsAndAnnouncementWidget extends StatefulWidget {
   final Function(int rating, String comment)? onAddReview;
 
   const ReviewsAndAnnouncementWidget({
-    Key? key,
+    super.key,
     required this.reviews,
     this.isAnnouncementVisible = true,
     this.announcementTitle = "ANNOUNCEMENT OF THE WEEK",
@@ -24,7 +24,7 @@ class ReviewsAndAnnouncementWidget extends StatefulWidget {
     this.accentColor = Colors.amber,
     this.darkColor = const Color(0xFF4E342E),
     this.onAddReview,
-  }) : super(key: key);
+  });
 
   @override
   State<ReviewsAndAnnouncementWidget> createState() => _ReviewsAndAnnouncementWidgetState();
@@ -108,7 +108,7 @@ class _ReviewsAndAnnouncementWidgetState extends State<ReviewsAndAnnouncementWid
                       children: [
                         CircleAvatar(
                           radius: 16,
-                          backgroundColor: widget.primaryColor.withOpacity(0.1),
+                          backgroundColor: widget.primaryColor.withValues(alpha: 0.1),
                           child: Text(
                             "G", // Guest
                             style: TextStyle(color: widget.primaryColor, fontSize: 12, fontWeight: FontWeight.bold),
@@ -235,7 +235,7 @@ class _ReviewsAndAnnouncementWidgetState extends State<ReviewsAndAnnouncementWid
                               children: [
                                 CircleAvatar(
                                   radius: 16, 
-                                  backgroundColor: widget.primaryColor.withOpacity(0.1),
+                                  backgroundColor: widget.primaryColor.withValues(alpha: 0.1),
                                   child: Text(avatarInitial, style: TextStyle(color: widget.primaryColor, fontSize: 12, fontWeight: FontWeight.bold)),
                                 ),
                                 const SizedBox(width: 8),
@@ -284,7 +284,7 @@ class _ReviewsAndAnnouncementWidgetState extends State<ReviewsAndAnnouncementWid
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey.shade200),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6, offset: const Offset(0, 3))],
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 6, offset: const Offset(0, 3))],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,7 +293,7 @@ class _ReviewsAndAnnouncementWidgetState extends State<ReviewsAndAnnouncementWid
                             children: [
                               CircleAvatar(
                                 radius: 16, 
-                                backgroundColor: widget.primaryColor.withOpacity(0.1),
+                                backgroundColor: widget.primaryColor.withValues(alpha: 0.1),
                                 child: Text(avatarInitial, style: TextStyle(color: widget.primaryColor, fontSize: 12, fontWeight: FontWeight.bold)),
                               ),
                               const SizedBox(width: 8),
@@ -336,14 +336,14 @@ class _ReviewsAndAnnouncementWidgetState extends State<ReviewsAndAnnouncementWid
               decoration: BoxDecoration(
                 color: widget.darkColor,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [BoxShadow(color: widget.primaryColor.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 4))],
+                boxShadow: [BoxShadow(color: widget.primaryColor.withValues(alpha: 0.2), blurRadius: 8, offset: const Offset(0, 4))],
               ),
               child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: widget.accentColor.withOpacity(0.2),
+                      color: widget.accentColor.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(Icons.campaign, color: widget.accentColor, size: 28),

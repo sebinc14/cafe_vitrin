@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'widget_config.dart';
 
 import 'custom_header.dart';
 import 'search_widget.dart';
@@ -8,11 +7,6 @@ import 'banner_carousel_widget.dart';
 import 'flash_sale_widget.dart';
 import 'barista_suggestion_widget.dart';
 import 'quality_and_products_widget.dart';
-import 'gamification_widget.dart';
-import 'reviews_and_announcement_widget.dart';
-import 'cart_modal_widget.dart';
-import 'customization_dialog_widget.dart';
-import 'animated_rating_modal.dart';
 import 'custom_drawer_widget.dart';
 import 'floating_call_waiter_widget.dart';
 
@@ -21,7 +15,7 @@ void main() {
 }
 
 class CafeCustomizerApp extends StatelessWidget {
-  const CafeCustomizerApp({Key? key}) : super(key: key);
+  const CafeCustomizerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +32,7 @@ class CafeCustomizerApp extends StatelessWidget {
 }
 
 class CustomizerHomePage extends StatefulWidget {
-  const CustomizerHomePage({Key? key}) : super(key: key);
+  const CustomizerHomePage({super.key});
 
   @override
   State<CustomizerHomePage> createState() => _CustomizerHomePageState();

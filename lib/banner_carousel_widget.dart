@@ -9,13 +9,13 @@ class BannerCarouselWidget extends StatefulWidget {
   final Duration autoPlayInterval;
 
   const BannerCarouselWidget({
-    Key? key,
+    super.key,
     required this.banners,
     this.indicatorActiveColor = const Color(0xFF6B4E3D),
     this.indicatorInactiveColor = const Color(0xFFE0E0E0),
     this.height = 180,
     this.autoPlayInterval = const Duration(seconds: 4),
-  }) : super(key: key);
+  });
 
   @override
   State<BannerCarouselWidget> createState() => _BannerCarouselWidgetState();
@@ -67,8 +67,8 @@ class _BannerCarouselWidgetState extends State<BannerCarouselWidget> {
                   borderRadius: BorderRadius.circular(16),
                   gradient: LinearGradient(
                     colors: [
-                      Colors.black.withOpacity(0.8),
-                      Colors.black.withOpacity(0.2),
+                      Colors.black.withValues(alpha: 0.8),
+                      Colors.black.withValues(alpha: 0.2),
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,

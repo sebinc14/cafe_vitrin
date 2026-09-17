@@ -18,7 +18,7 @@ class FlashSaleWidget extends StatefulWidget {
   final Function(Map<String, dynamic> product)? onAddToCart;
 
   const FlashSaleWidget({
-    Key? key,
+    super.key,
     this.title = "Flash Sales",
     this.subtitle = "Limited time special taste discounts",
     required this.products,
@@ -31,7 +31,7 @@ class FlashSaleWidget extends StatefulWidget {
     this.onProductTap,
     this.onFavoriteToggle,
     this.onAddToCart,
-  }) : super(key: key);
+  });
 
   @override
   State<FlashSaleWidget> createState() => _FlashSaleWidgetState();
@@ -83,7 +83,7 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: widget.accentColor.withOpacity(0.4), width: 1.5),
+          border: Border.all(color: widget.accentColor.withValues(alpha: 0.4), width: 1.5),
         ),
         child: Column(
           children: [
@@ -95,7 +95,7 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: widget.flashIconColor.withOpacity(0.1),
+                      color: widget.flashIconColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(Icons.local_fire_department, color: widget.flashIconColor, size: 24),
@@ -159,7 +159,7 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 4))
+                          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8, offset: const Offset(0, 4))
                         ],
                         border: Border.all(color: Colors.grey.shade100),
                       ),
@@ -177,7 +177,7 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                                         image, 
                                         width: double.infinity, 
                                         fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) => Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
+                                        errorBuilder: (_, _, _) => Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
                                       )
                                     : Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
                                 ),

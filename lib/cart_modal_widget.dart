@@ -92,7 +92,6 @@ class _CartBottomSheet extends StatefulWidget {
   final VoidCallback? onCheckout;
 
   const _CartBottomSheet({
-    Key? key,
     required this.isHome,
     required this.activeTable,
     required this.deliveryAddress,
@@ -117,7 +116,7 @@ class _CartBottomSheet extends StatefulWidget {
     this.onTogglePoints,
     this.onClearCart,
     this.onCheckout,
-  }) : super(key: key);
+  });
 
   @override
   State<_CartBottomSheet> createState() => _CartBottomSheetState();
@@ -227,7 +226,7 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(color: Colors.grey.shade200),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8, offset: const Offset(0, 4))],
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 8, offset: const Offset(0, 4))],
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -471,7 +470,7 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -4))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -4))],
             ),
             child: Column(
               children: [

@@ -21,7 +21,7 @@ class QualityAndProductsWidget extends StatelessWidget {
   final VoidCallback? onViewAllTap;
 
   const QualityAndProductsWidget({
-    Key? key,
+    super.key,
     required this.products,
     this.sectionTitle = "Popular Tastes",
     this.viewAllText = "View All",
@@ -37,7 +37,7 @@ class QualityAndProductsWidget extends StatelessWidget {
     this.onFavoriteToggle,
     this.onAddToCart,
     this.onViewAllTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class QualityAndProductsWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
-                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 4))],
+                      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 10, offset: const Offset(0, 4))],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +120,7 @@ class QualityAndProductsWidget extends StatelessWidget {
                                       image, 
                                       width: double.infinity, 
                                       fit: BoxFit.cover,
-                                      errorBuilder: (_, __, ___) => Container(color: Colors.grey.shade200, child: const Icon(Icons.image_not_supported, color: Colors.grey)),
+                                      errorBuilder: (_, _, _) => Container(color: Colors.grey.shade200, child: const Icon(Icons.image_not_supported, color: Colors.grey)),
                                     )
                                   : Container(color: Colors.grey.shade200, child: const Center(child: Icon(Icons.image, color: Colors.grey))),
                               ),
@@ -129,7 +129,7 @@ class QualityAndProductsWidget extends StatelessWidget {
                                 left: 8,
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.7), borderRadius: BorderRadius.circular(6)),
+                                  decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.7), borderRadius: BorderRadius.circular(6)),
                                   child: Row(
                                     children: [
                                       Icon(Icons.star, color: iconColor, size: 12),
@@ -148,7 +148,7 @@ class QualityAndProductsWidget extends StatelessWidget {
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)]),
+                                    decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), blurRadius: 4)]),
                                     child: Icon(
                                       isFavorite ? Icons.favorite : Icons.favorite_border,
                                       color: isFavorite ? favoriteIconColor : Colors.grey,

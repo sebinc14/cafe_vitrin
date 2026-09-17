@@ -17,7 +17,7 @@ class CustomizationDialogWidget extends StatefulWidget {
   final Function(Map<String, dynamic> customizedProduct)? onUpdateCart;
 
   const CustomizationDialogWidget({
-    Key? key,
+    super.key,
     required this.productTitle,
     required this.productPrice,
     this.imageUrl,
@@ -31,7 +31,7 @@ class CustomizationDialogWidget extends StatefulWidget {
     this.activeBgColor = const Color(0xFFFDF8F0),
     this.onAddToCart,
     this.onUpdateCart,
-  }) : super(key: key);
+  });
 
   static void showCustomization(BuildContext context, {
     required String productTitle, 
@@ -64,7 +64,7 @@ class CustomizationDialogWidget extends StatefulWidget {
 
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.7), 
+      barrierColor: Colors.black.withValues(alpha: 0.7), 
       builder: (context) => CustomizationDialogWidget(
         productTitle: productTitle,
         productPrice: productPrice,
@@ -93,7 +93,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
   TextEditingController noteController = TextEditingController();
 
   // state for modifiers
-  Map<int, dynamic> _selectedOptions = {};
+  final Map<int, dynamic> _selectedOptions = {};
   
   // state for removed ingredients
   Set<String> _removedIngredients = {};
@@ -240,7 +240,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.black.withOpacity(0.1), Colors.black.withOpacity(0.8)],
+                      colors: [Colors.black.withValues(alpha: 0.1), Colors.black.withValues(alpha: 0.8)],
                     ),
                   ),
                 ),
@@ -251,7 +251,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                     onTap: () => Navigator.pop(context),
                     child: Container(
                       padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), shape: BoxShape.circle),
+                      decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.5), shape: BoxShape.circle),
                       child: const Icon(Icons.close, color: Colors.white, size: 20),
                     ),
                   ),
@@ -297,7 +297,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildSectionTitle("${gIdx + 1}. ${(group['title'] ?? '').toString().toUpperCase()}" + (group['isRequired'] == true ? " *" : "")),
+                            _buildSectionTitle("${gIdx + 1}. ${(group['title'] ?? '').toString().toUpperCase()}${group['isRequired'] == true ? " *" : ""}"),
                             if (isCheckbox && maxSel > 1) 
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
@@ -378,7 +378,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                                                     extraPStr.isNotEmpty ? extraPStr : " ",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                      color: isSelected ? widget.primaryColor.withOpacity(0.8) : Colors.grey.shade500,
+                                                      color: isSelected ? widget.primaryColor.withValues(alpha: 0.8) : Colors.grey.shade500,
                                                       fontSize: 11,
                                                       fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                                                     ),
@@ -397,7 +397,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                             const SizedBox(height: 24),
                           ],
                         );
-                      }).toList(),
+                      }),
 
                     if (widget.recipe != null && widget.recipe!.isNotEmpty && (widget.modifierGroups?.any((g) => g['isIngredientRemoval'] == true) ?? false))
                       Column(
@@ -482,7 +482,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -4))],
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -4))],
               ),
               child: Row(
                 children: [
@@ -528,7 +528,7 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                           if (isValid)
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
+                              decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(8)),
                               child: Text("${totalPrice.toStringAsFixed(2)} TL", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
                             )
                         ],

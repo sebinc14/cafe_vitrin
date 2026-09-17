@@ -47,7 +47,7 @@ class CustomDrawerWidget extends StatelessWidget {
   final VoidCallback? onCloseTap;
 
   const CustomDrawerWidget({
-    Key? key,
+    super.key,
     required this.activeTable,
     required this.userName,
     required this.userEmail,
@@ -71,7 +71,7 @@ class CustomDrawerWidget extends StatelessWidget {
     this.onCallWaiterTap,
     this.onLogoutTap,
     this.onCloseTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +116,7 @@ class CustomDrawerWidget extends StatelessWidget {
                           const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
+                            decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(12)),
                             child: Text(activeTable, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                           ),
                         ],
@@ -128,7 +128,7 @@ class CustomDrawerWidget extends StatelessWidget {
                   onTap: onCloseTap ?? () => Navigator.pop(context),
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+                    decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.2), shape: BoxShape.circle),
                     child: const Icon(Icons.close, color: Colors.white, size: 16),
                   ),
                 )
@@ -189,7 +189,7 @@ class CustomDrawerWidget extends StatelessWidget {
                     iconColor: item.iconColor ?? Colors.grey,
                     trailingWidget: item.trailingWidget,
                     onTap: item.onTap,
-                  )).toList(),
+                  )),
                 ],
               ),
             ),
@@ -200,7 +200,7 @@ class CustomDrawerWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: cardBackgroundColor,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -4))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -4))],
             ),
             child: Column(
               children: [
@@ -227,7 +227,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       icon: const Icon(Icons.logout, color: Colors.redAccent, size: 18),
                       label: Text(logoutText, style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.red.withOpacity(0.05),
+                        backgroundColor: Colors.red.withValues(alpha: 0.05),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
