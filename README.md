@@ -30,4 +30,45 @@ Aşağıda projede yer alan temel widget'ların listesi ve ne işe yaradıkları
 
 ---
 
+## Kurulum (Installation)
+
+Paketi projenize dahil etmek için `pubspec.yaml` dosyanıza şu satırı ekleyin:
+
+```yaml
+dependencies:
+  cafe_vitrin: ^1.0.0
+```
+
+Veya terminalden şu komutu çalıştırın:
+```bash
+flutter pub add cafe_vitrin
+```
+
+## Kullanım (Usage)
+
+Kütüphaneyi içeri aktardıktan sonra widget'ları kolayca kullanabilirsiniz. Tüm widget'lara tek bir import üzerinden erişebilirsiniz:
+
+```dart
+import 'package:cafe_vitrin/cafe_vitrin.dart';
+```
+
+### Örnek 1: Değerlendirme Modalı (AnimatedRatingModal)
+```dart
+ElevatedButton(
+  onPressed: () {
+    AnimatedRatingModal.show(
+      context, 
+      "Siparis-123", 
+      [{"name": "Filtre Kahve"}],
+      primaryColor: Colors.brown,
+      starColor: Colors.orange,
+      onSubmit: (rating, comment) {
+        print("Puan: $rating, Yorum: $comment");
+      }
+    );
+  },
+  child: Text("Siparişi Değerlendir"),
+)
+```
+
 *(Detaylı kullanım örnekleri ve her bir widget'ın aldığı parametrelerin açıklamaları için projedeki `docs/` klasöründeki markdown (.md) belgelerine göz atabilirsiniz.)*

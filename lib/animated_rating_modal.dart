@@ -9,6 +9,7 @@ class AnimatedRatingModal extends StatefulWidget {
   final String hintText;
   final String submitButtonText;
   final String successMessage;
+  final Color starColor;
   final Function(int rating, String comment)? onSubmit;
 
   const AnimatedRatingModal({
@@ -16,6 +17,7 @@ class AnimatedRatingModal extends StatefulWidget {
     required this.orderId,
     required this.orderItems,
     this.primaryColor = const Color(0xFF6B4E3D),
+    this.starColor = Colors.amber,
     this.title = "How was your coffee?",
     this.subtitle = "Rating us helps us improve our quality.",
     this.hintText = "Anything you'd like to add? (Optional)",
@@ -29,6 +31,7 @@ class AnimatedRatingModal extends StatefulWidget {
     String orderId, 
     List<dynamic> orderItems, {
     Color primaryColor = const Color(0xFF6B4E3D),
+    Color starColor = Colors.amber,
     Function(int rating, String comment)? onSubmit,
   }) async {
     return showModalBottomSheet(
@@ -41,6 +44,7 @@ class AnimatedRatingModal extends StatefulWidget {
           orderId: orderId, 
           orderItems: orderItems,
           primaryColor: primaryColor,
+          starColor: starColor,
           onSubmit: onSubmit,
         ),
       ),
@@ -128,7 +132,7 @@ class _AnimatedRatingModalState extends State<AnimatedRatingModal> {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Icon(
                     starIndex <= _currentRating ? Icons.star_rounded : Icons.star_outline_rounded,
-                    color: Colors.amber,
+                    color: widget.starColor,
                     size: 48,
                   ),
                 ),
