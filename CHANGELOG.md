@@ -1,4 +1,8 @@
-## 1.0.0
+## 1.0.1
 
-* Initial release of Cafe Vitrin Widgets package.
+* Added `example` app for demonstrating widget usage.
+* Replaced `print` statements with `debugPrint`.
+* Added dartdoc comments to public APIs to improve package score.
+
+## 1.0.0* Initial release of Cafe Vitrin Widgets package.
 * Includes custom widgets for cafe and e-commerce applications (Cart, Rating, Gamification, etc.).
