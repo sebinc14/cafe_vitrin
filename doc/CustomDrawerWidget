@@ -1,0 +1,32 @@
+CustomDrawerWidget(
+  activeTable: "Table 5",
+  userName: "Jane Doe",
+  userEmail: "jane@example.com",
+  avatarLetter: "J",
+  loyaltyStamps: 3,
+  totalMokaPoints: 120,
+  menuItems: [
+    DrawerMenuItem(
+      icon: Icons.favorite,
+      title: "Favorite Products",
+      onTap: () {
+        print("Favorites tapped");
+      },
+    ),
+  ],
+  onCallWaiterTap: () {
+    print("Waiter called!");
+  },
+  onLogoutTap: () {
+    print("Logged out!");
+  },
+);
+activeTable — The current table identifier string shown in the profile badge. This field is required.
+
+userName — The display name of the profile. This field is required.
+
+userEmail — The email address text displayed beneath the user name. This field is required.
+
+avatarLetter — The initial letter rendered inside the profile avatar. This field is required.
+
+menuItems — A list of custom navigation menu items (DrawerMenuItem). This field is required.

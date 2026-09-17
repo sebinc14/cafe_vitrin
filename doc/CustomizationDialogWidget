@@ -1,0 +1,18 @@
+CustomizationDialogWidget.showCustomization(
+  context,
+  productTitle: "Filter Coffee",
+  productPrice: "60.0 TL",
+  imageUrl: "[https://example.com/coffee.jpg](https://example.com/coffee.jpg)",
+  category: "Hot Drinks",
+  primaryColor: Colors.brown,
+  onAddToCart: (customizedProduct) {
+    print("Added product: ${customizedProduct["title"]} with price ${customizedProduct["price"]}");
+  },
+);
+productTitle — The name of the product being customized. This field is required.
+
+productPrice — The initial string representation of the product price. This field is required.
+
+modifierGroups — A list of custom option groups rendered dynamically.
+
+recipe — A list of recipe ingredients that the user can choose to remove.

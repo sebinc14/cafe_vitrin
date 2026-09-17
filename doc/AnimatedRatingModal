@@ -1,0 +1,38 @@
+# Cafe Widgets Kütüphanesi
+
+Bu paket, kafe ve e-ticaret uygulamaları için özelleştirilebilir, modern arayüz bileşenleri sunar.
+
+## Mevcut Widget'lar
+
+---
+
+### AnimatedRatingModal
+
+```dart
+AnimatedRatingModal.show(
+  context,
+  "ORDER-123", // orderId
+  ["Espresso", "Croissant"], // orderItems
+  primaryColor: Colors.deepOrange,
+  title: "Rate your experience",
+  onSubmit: (rating, comment) {
+    print("User gave $rating stars and said:$comment");
+  },
+);
+orderId — The unique identifier of the order being rated. This field is required.
+
+orderItems — A list of items (dynamic) associated with the order. This field is required.
+
+primaryColor — The theme color applied to the title, focused input border, and submit button; Color(0xFF6B4E3D) (default) means a dark espresso brown.
+
+title — The main heading displayed inside the modal; "How was your coffee?" (default).
+
+subtitle — The descriptive text beneath the main heading; "Rating us helps us improve our quality." (default).
+
+hintText — The placeholder text inside the comment text field; "Anything you'd like to add? (Optional)" (default).
+
+submitButtonText — The text label on the primary action button; "Submit" (default).
+
+successMessage — The message intended for display post-submission; "Thank you for your feedback!" (default).
+
+onSubmit — Callback function triggered when the form is submitted. It returns the integer rating (1 to 5) and the comment string.

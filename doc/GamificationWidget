@@ -1,0 +1,17 @@
+GamificationWidget(
+  prizes: [
+    Prize("Free Espresso", Colors.brown, "cart", null, Icons.coffee),
+    Prize("20% Discount", Colors.orange, "code", "MOKA20", Icons.local_offer),
+    Prize("Try Again", Colors.grey, "none", null, Icons.sentiment_dissatisfied),
+  ],
+  titleText: "Wheel of Fortune",
+  subtitleText: "Spin the wheel, catch surprise discounts!",
+  gradientStartColor: Colors.brown,
+  gradientEndColor: Colors.amber,
+  onPrizeWon: (prize) {
+    print("Won prize: ${prize.title}");
+  },
+);
+prizes — A required list of Prize objects configured with a title, color, action type, and icon.
+
+onPrizeWon — Callback function triggered when the user wins a prize.

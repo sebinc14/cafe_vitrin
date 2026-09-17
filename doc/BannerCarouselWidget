@@ -1,0 +1,28 @@
+BannerCarouselWidget(
+  banners: [
+    {
+      "imageUrl": "[https://example.com/promo1.jpg](https://example.com/promo1.jpg)",
+      "tagText": "NEW",
+      "tagColor": Colors.red,
+      "title": "Summer Deals",
+      "subtitle": "20% off all cold drinks!"
+    },
+    {
+      "imageUrl": "[https://example.com/promo2.jpg](https://example.com/promo2.jpg)",
+      "title": "Coffee Hour",
+      "subtitle": "Buy 1 Get 1 Free on all Espressos"
+    }
+  ],
+  height: 200,
+  indicatorActiveColor: Colors.deepOrange,
+  autoPlayInterval: const Duration(seconds: 5),
+)
+banners — A list of maps containing the data for each slide. Expected keys are imageUrl, tagText, tagColor, title, and subtitle. This field is required.
+
+indicatorActiveColor — The color of the active pagination dot; Color(0xFF6B4E3D) (default).
+
+indicatorInactiveColor — The color of the unselected pagination dots; Color(0xFFE0E0E0) (default).
+
+height — The fixed height of the carousel slider; 180 (default).
+
+autoPlayInterval — The time duration between automatic slide transitions; Duration(seconds: 4) (default).

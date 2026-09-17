@@ -1,0 +1,20 @@
+QualityAndProductsWidget(
+  products: [
+    {
+      "name": "Latte",
+      "price": 75.0,
+      "imageUrl": "[https://example.com/latte.jpg](https://example.com/latte.jpg)",
+      "description": "Smooth espresso with steamed milk.",
+      "isFavorite": false,
+      "rating": "4.9",
+    }
+  ],
+  sectionTitle: "Popular Tastes",
+  viewAllText: "View All",
+  onAddToCart: (product) {
+    print("Added product: ${product["name"]}");
+  },
+);
+products — A required list of maps containing product details.
+
+sectionTitle — The main section header title text; "Popular Tastes" (default).

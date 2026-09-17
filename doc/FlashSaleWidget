@@ -1,0 +1,23 @@
+FlashSaleWidget(
+  title: "Flash Sales",
+  subtitle: "Limited time special taste discounts",
+  products: [
+    {
+      "name": "Caramel Macchiato",
+      "oldPrice": 120.0,
+      "price": 80.0,
+      "discountPercentage": 33,
+      "imageUrl": "[https://example.com/macchiato.jpg](https://example.com/macchiato.jpg)",
+      "isFavorite": true,
+    }
+  ],
+  initialDuration: const Duration(hours: 2, minutes: 59, seconds: 19),
+  primaryColor: Colors.brown,
+  accentColor: Colors.amber,
+  onAddToCart: (product) {
+    print("Added flash item: ${product["name"]}");
+  },
+);
+products — A required list of maps containing product specifications.
+
+initialDuration — The starting countdown time length for the flash sale session.

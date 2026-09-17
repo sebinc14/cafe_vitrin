@@ -1,0 +1,17 @@
+StoryWidget(
+  stories: [
+    {
+      "image": "[https://example.com/story1.jpg](https://example.com/story1.jpg)",
+      "title": "Morning Coffee",
+      "isLive": false,
+    },
+    {
+      "image": "[https://example.com/story2.jpg](https://example.com/story2.jpg)",
+      "title": "Live Brew",
+      "isLive": true,
+    }
+  ],
+  primaryColor: Colors.brown,
+  accentColor: Colors.amber,
+);
+stories — A required list of maps containing story specifications (image, title, isLive).

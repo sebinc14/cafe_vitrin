@@ -1,0 +1,28 @@
+BaristaSuggestionWidget(
+  productName: "Guatemala Special Brew",
+  description: "Freshly brewed with special Guatemala beans.",
+  imageUrl: "[https://example.com/coffee.jpg](https://example.com/coffee.jpg)",
+  price: 85.00,
+  isFavorite: true,
+  onAddToCart: () {
+    print("Added to cart!");
+  },
+  onFavoriteToggle: () {
+    print("Favorite toggled!");
+  },
+);
+sectionTitle — The header title displayed inside the top badge; "Barista's Pick of the Day" (default).
+
+productName — The primary name of the featured product. This field is required.
+
+description — A brief description text explaining the product features. This field is required.
+
+imageUrl — The network image URL for the featured product preview. This field is required.
+
+price — The numeric value representing the product cost. This field is required.
+
+isFavorite — A boolean flag indicating whether the product is marked as a favorite; false (default).
+
+onAddToCart — Callback function triggered when the add action button is pressed.
+
+onFavoriteToggle — Callback function triggered when the favorite button overlay is pressed.

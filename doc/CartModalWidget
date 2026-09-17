@@ -1,0 +1,34 @@
+CartModalWidget.showCartScreen(
+  context,
+  isHome: false,
+  activeTable: "Table 5",
+  cartItems: [
+    {
+      "title": "Espresso",
+      "price": 60.0,
+      "quantity": 2,
+      "imageUrl": "[https://example.com/espresso.jpg](https://example.com/espresso.jpg)",
+      "extras": ["Extra Shot"],
+    }
+  ],
+  totalMokaPoints: 150.0,
+  subtotal: 120.0,
+  finalTotalPrice: 120.0,
+  primaryColor: Colors.brown,
+  onCheckout: () {
+    print("Checkout confirmed!");
+  },
+);
+isHome — A boolean flag that switches the delivery mode header; false (default).
+
+activeTable — The identifier label for the current table; "Masa" (default).
+
+cartItems — A list of maps containing product details; [] (default).
+
+totalMokaPoints — The total amount of loyalty points available; 0.0 (default).
+
+subtotal — The intermediate total cost; 0.0 (default).
+
+finalTotalPrice — The ultimate calculated sum due after all adjustments; 0.0 (default).
+
+onCheckout — Callback function triggered when the final order confirmation button is pressed.

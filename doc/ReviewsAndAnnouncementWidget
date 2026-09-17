@@ -1,0 +1,21 @@
+ReviewsAndAnnouncementWidget(
+  reviews: [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "rating": 5,
+      "comment": "Amazing coffee and cozy atmosphere!",
+      "dateStr": "2026-09-10",
+    }
+  ],
+  isAnnouncementVisible: true,
+  announcementTitle: "ANNOUNCEMENT OF THE WEEK",
+  announcementSubtitle: "Live Acoustic Music Evenings!",
+  announcementDescription: "Enjoy music with the smell of fresh coffee.",
+  onAddReview: (rating, comment) {
+    print("New review added: $rating stars -$comment");
+  },
+);
+reviews — A required list of maps containing user review data.
+
+isAnnouncementVisible — A boolean flag that toggles the weekly announcement banner; true (default).

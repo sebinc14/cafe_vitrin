@@ -1,0 +1,28 @@
+CustomHeader(
+  title: "Moka Mola",
+  subtitle: "CAFE",
+  activeTable: "Table 5",
+  totalItemCount: 3,
+  primaryColor: Colors.brown,
+  accentColor: Colors.amber,
+  badgeColor: Colors.red,
+  onMenuTap: () {
+    print("Menu tapped");
+  },
+  onQrTap: () {
+    print("QR scanner tapped");
+  },
+  onNotificationTap: () {
+    print("Notification bell tapped");
+  },
+  onCartTap: () {
+    print("Cart icon tapped");
+  },
+);
+title — The primary brand or heading text displayed on the header; "Moka Mola" (default).
+
+subtitle — Secondary badge text displayed next to the title; "CAFE" (default).
+
+activeTable — The identifier label shown next to the QR scanner icon; "Table" (default).
+
+totalItemCount — The numeric counter value displayed inside the shopping bag badge; 0 (default).

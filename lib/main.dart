@@ -61,73 +61,26 @@ class _CustomizerHomePageState extends State<CustomizerHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cafe Arayüz Özelleştirici'),
-        actions: [
-          // Sağ üstte ayarlar panelini açan buton
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.tune, size: 28),
-              tooltip: 'Tasarımı Özelleştir',
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-            ),
-          ),
-        ],
       ),
-      // SAĞ TARAF: Özelleştirme Paneli (Görseldeki sağ panelin birebir aynısı)
-      endDrawer: Drawer(
-        width: 350,
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.brown),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('Tasarım Yönetim Paneli', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 8),
-                  Text('Metinleri ve ayarları anlık değiştirebilirsiniz.', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                ],
-              ),
-            ),
-            const Text("1. Header (Başlık) Ayarları", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown)),
-            TextField(
-              controller: TextEditingController(text: _customizations['cafeTitle']),
-              decoration: const InputDecoration(labelText: 'Kafe Adı'),
-              onChanged: (val) => setState(() => _customizations['cafeTitle'] = val),
-            ),
-            TextField(
-              controller: TextEditingController(text: _customizations['cafeSubtitle']),
-              decoration: const InputDecoration(labelText: 'Alt Başlık (Badge)'),
-              onChanged: (val) => setState(() => _customizations['cafeSubtitle'] = val),
-            ),
-            TextField(
-              controller: TextEditingController(text: _customizations['activeTable']),
-              decoration: const InputDecoration(labelText: 'Aktif Masa Bilgisi'),
-              onChanged: (val) => setState(() => _customizations['activeTable'] = val),
-            ),
-            const SizedBox(height: 20),
-            const Text("2. Arama Çubuğu Ayarları", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown)),
-            TextField(
-              controller: TextEditingController(text: _customizations['searchHint']),
-              decoration: const InputDecoration(labelText: 'Arama İpucu (Hint Text)'),
-              onChanged: (val) => setState(() => _customizations['searchHint'] = val),
-            ),
-            const SizedBox(height: 20),
-            const Text("3. Barista Önerisi Ayarları", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown)),
-            TextField(
-              controller: TextEditingController(text: _customizations['baristaProduct']),
-              decoration: const InputDecoration(labelText: 'Ürün Adı'),
-              onChanged: (val) => setState(() => _customizations['baristaProduct'] = val),
-            ),
-            TextField(
-              controller: TextEditingController(text: _customizations['baristaPrice'].toString()),
-              decoration: const InputDecoration(labelText: 'Fiyat (TL)'),
-              keyboardType: TextInputType.number,
-              onChanged: (val) => setState(() => _customizations['baristaPrice'] = double.tryParse(val) ?? 85.0),
-            ),
-          ],
-        ),
+      drawer: CustomDrawerWidget(
+        activeTable: _customizations['activeTable'],
+        userName: "Misafir",
+        userEmail: "misafir@example.com",
+        avatarLetter: "M",
+        loyaltyStamps: 3,
+        totalMokaPoints: 120,
+        menuItems: [
+          DrawerMenuItem(icon: Icons.person_outline, title: "Profilim", onTap: () {}),
+          DrawerMenuItem(icon: Icons.history, title: "Sipariş Geçmişi", onTap: () {}),
+          DrawerMenuItem(icon: Icons.local_offer_outlined, title: "Kampanyalar", onTap: () {}),
+          DrawerMenuItem(icon: Icons.favorite_border, title: "Favorilerim", onTap: () {}),
+          DrawerMenuItem(icon: Icons.location_on_outlined, title: "Adreslerim", onTap: () {}),
+          DrawerMenuItem(icon: Icons.credit_card, title: "Ödeme Yöntemleri", onTap: () {}),
+          DrawerMenuItem(icon: Icons.help_outline, title: "İletişim ve Destek", onTap: () {}),
+          DrawerMenuItem(icon: Icons.settings, title: "Ayarlar", onTap: () {}),
+        ],
+        onCallWaiterTap: () => print("Garson Çağrıldı"),
+        onLogoutTap: () => print("Çıkış Yapıldı"),
       ),
       // ORTA/SOL TARAF: Sabit Sıralı Kafe Vitrini (Canlı Önizleme)
       body: Center(

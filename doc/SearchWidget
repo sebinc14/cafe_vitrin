@@ -1,0 +1,17 @@
+SearchWidget(
+  products: [
+    {
+      "name": "Cappuccino",
+      "category": "Hot Drinks",
+      "price": 70.0,
+      "imageUrl": "[https://example.com/cappuccino.jpg](https://example.com/cappuccino.jpg)",
+    }
+  ],
+  hintText: "Search for coffee, dessert or snacks...",
+  onProductTap: (product) {
+    print("Selected product: ${product["name"]}");
+  },
+);
+products — A required list of maps containing product details.
+
+hintText — The placeholder hint string displayed inside the search input.

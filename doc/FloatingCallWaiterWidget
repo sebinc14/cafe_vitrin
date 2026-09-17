@@ -1,0 +1,12 @@
+FloatingCallWaiterWidget(
+  activeTable: "Table 5",
+  buttonText: "Call Waiter",
+  primaryColor: Colors.brown,
+  accentColor: Colors.amber,
+  onCallWaiter: () {
+    print("Waiter called for Table 5!");
+  },
+);
+activeTable — The identifier label string displayed inside the table badge; "Table" (default).
+
+buttonText — The main text label displayed on the action button; "Call Waiter" (default).
