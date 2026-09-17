@@ -346,8 +346,9 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                       ...widget.modifierGroups!.asMap().entries.map((entry) {
                         final int gIdx = entry.key;
                         final Map<String, dynamic> group = entry.value;
-                        if (group['isIngredientRemoval'] == true)
+                        if (group['isIngredientRemoval'] == true) {
                           return const SizedBox.shrink();
+                        }
 
                         final List options = group['options'] as List? ?? [];
                         final bool isCheckbox = group['type'] == 'checkbox';
@@ -416,8 +417,9 @@ class _CustomizationDialogWidgetState extends State<CustomizationDialogWidget> {
                                             if (isSelected) {
                                               selSet.remove(oIdx);
                                             } else {
-                                              if (selSet.length < maxSel)
+                                              if (selSet.length < maxSel) {
                                                 selSet.add(oIdx);
+                                              }
                                             }
                                             _selectedOptions[gIdx] = selSet;
                                           } else {

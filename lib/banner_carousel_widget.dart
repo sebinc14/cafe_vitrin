@@ -20,13 +20,13 @@ class BannerCarouselWidget extends StatefulWidget {
 
   /// Creates a new [BannerCarouselWidget].
   const BannerCarouselWidget({
-    Key? key,
+    super.key,
     required this.banners,
     this.indicatorActiveColor = const Color(0xFF6B4E3D),
     this.indicatorInactiveColor = const Color(0xFFE0E0E0),
     this.height = 180,
     this.autoPlayInterval = const Duration(seconds: 4),
-  }) : super(key: key);
+  });
 
   @override
   State<BannerCarouselWidget> createState() => _BannerCarouselWidgetState();

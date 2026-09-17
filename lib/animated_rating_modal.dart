@@ -34,7 +34,7 @@ class AnimatedRatingModal extends StatefulWidget {
 
   /// Creates a new [AnimatedRatingModal].
   const AnimatedRatingModal({
-    Key? key,
+    super.key,
     required this.orderId,
     required this.orderItems,
     this.primaryColor = const Color(0xFF6B4E3D),
@@ -45,7 +45,7 @@ class AnimatedRatingModal extends StatefulWidget {
     this.submitButtonText = "Submit",
     this.successMessage = "Thank you for your feedback!",
     this.onSubmit,
-  }) : super(key: key);
+  });
 
   /// Shows the [AnimatedRatingModal] as a bottom sheet.
   static Future<void> show(

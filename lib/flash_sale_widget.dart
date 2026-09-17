@@ -182,8 +182,9 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
 
                   return GestureDetector(
                     onTap: () {
-                      if (widget.onProductTap != null)
+                      if (widget.onProductTap != null) {
                         widget.onProductTap!(data);
+                      }
                     },
                     child: Container(
                       width: 130,
@@ -267,8 +268,9 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                                   right: 6,
                                   child: GestureDetector(
                                     onTap: () {
-                                      if (widget.onFavoriteToggle != null)
+                                      if (widget.onFavoriteToggle != null) {
                                         widget.onFavoriteToggle!(data);
+                                      }
                                     },
                                     child: Icon(
                                       isFavorite
@@ -329,8 +331,9 @@ class _FlashSaleWidgetState extends State<FlashSaleWidget> {
                                     // + BUTONUNA TIKLANINCA
                                     GestureDetector(
                                       onTap: () {
-                                        if (widget.onAddToCart != null)
+                                        if (widget.onAddToCart != null) {
                                           widget.onAddToCart!(data);
+                                        }
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.all(4),

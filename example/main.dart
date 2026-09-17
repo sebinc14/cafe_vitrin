@@ -8,7 +8,7 @@ void main() {
 /// Example app for Cafe Vitrin Widgets
 class CafeVitrinExample extends StatelessWidget {
   /// Constructor for Example App
-  const CafeVitrinExample({Key? key}) : super(key: key);
+  const CafeVitrinExample({super.key});
 
   @override
   Widget build(BuildContext context) {

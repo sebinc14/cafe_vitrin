@@ -345,8 +345,9 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          if (widget.onRemoveFromCart != null)
+                                          if (widget.onRemoveFromCart != null) {
                                             widget.onRemoveFromCart!(index);
+                                          }
                                         },
                                         child: const Icon(
                                           Icons.delete_outline,
@@ -396,8 +397,9 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                             const SizedBox(height: 6),
                                             GestureDetector(
                                               onTap: () {
-                                                if (widget.onEditItem != null)
+                                                if (widget.onEditItem != null) {
                                                   widget.onEditItem!(index);
+                                                }
                                               },
                                               child: Container(
                                                 padding:
@@ -451,10 +453,11 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                             InkWell(
                                               onTap: () {
                                                 if (widget.onDecreaseQuantity !=
-                                                    null)
+                                                    null) {
                                                   widget.onDecreaseQuantity!(
                                                     index,
                                                   );
+                                                }
                                               },
                                               child: const Padding(
                                                 padding: EdgeInsets.symmetric(
@@ -477,10 +480,11 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                                             InkWell(
                                               onTap: () {
                                                 if (widget.onIncreaseQuantity !=
-                                                    null)
+                                                    null) {
                                                   widget.onIncreaseQuantity!(
                                                     index,
                                                   );
+                                                }
                                               },
                                               child: const Padding(
                                                 padding: EdgeInsets.symmetric(
@@ -555,8 +559,9 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              if (widget.onRemoveCoupon != null)
+                              if (widget.onRemoveCoupon != null) {
                                 widget.onRemoveCoupon!();
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
@@ -736,8 +741,9 @@ class _CartBottomSheetState extends State<_CartBottomSheet> {
                           onPressed: widget.cartItems.isEmpty
                               ? null
                               : () {
-                                  if (widget.onTogglePoints != null)
+                                  if (widget.onTogglePoints != null) {
                                     widget.onTogglePoints!();
+                                  }
                                 },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: widget.isPointsApplied

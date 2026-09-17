@@ -200,8 +200,9 @@ class QualityAndProductsWidget extends StatelessWidget {
                                 right: 8,
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (onFavoriteToggle != null)
+                                    if (onFavoriteToggle != null) {
                                       onFavoriteToggle!(product);
+                                    }
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(6),
@@ -275,8 +276,9 @@ class QualityAndProductsWidget extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      if (onAddToCart != null)
+                                      if (onAddToCart != null) {
                                         onAddToCart!(product);
+                                      }
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(

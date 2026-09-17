@@ -25,7 +25,7 @@ class SearchWidget extends StatefulWidget {
 
   /// Creates a new [SearchWidget].
   const SearchWidget({
-    Key? key,
+    super.key,
     required this.products,
     this.hintText = "Search for coffee, dessert or snacks...",
     this.primaryColor = const Color(0xFF6B4E3D),
@@ -33,7 +33,7 @@ class SearchWidget extends StatefulWidget {
     this.darkColor = const Color(0xFF4E342E),
     this.onProductTap,
     this.onAddToCart,
-  }) : super(key: key);
+  });
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -136,8 +136,9 @@ class _SearchWidgetState extends State<SearchWidget> {
 
                       return ListTile(
                         onTap: () {
-                          if (widget.onProductTap != null)
+                          if (widget.onProductTap != null) {
                             widget.onProductTap!(data);
+                          }
                         },
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -189,8 +190,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                         ),
                         trailing: GestureDetector(
                           onTap: () {
-                            if (widget.onAddToCart != null)
+                            if (widget.onAddToCart != null) {
                               widget.onAddToCart!(data);
+                            }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
