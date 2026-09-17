@@ -1,6 +1,8 @@
-## 1.0.2
+## 1.0.3
 
-* Fixed `use_super_parameters` linter warnings to improve package score.
+* Re-published to fix version conflicts.
+
+## 1.0.2* Fixed `use_super_parameters` linter warnings to improve package score.
 
 ## 1.0.1* Added `example` app for demonstrating widget usage.
 * Replaced `print` statements with `debugPrint`.
