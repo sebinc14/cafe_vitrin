@@ -85,6 +85,17 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   String _couponCode = "MOKA10";
   String _couponDesc = "Use code for 10% off your first order!";
 
+  List<Map<String, dynamic>> _drawerItems = [
+    {"icon": Icons.person_outline, "title": "My Profile"},
+    {"icon": Icons.history, "title": "Order History"},
+    {"icon": Icons.local_offer_outlined, "title": "Campaigns"},
+    {"icon": Icons.favorite_border, "title": "Favorites"},
+    {"icon": Icons.location_on_outlined, "title": "My Addresses"},
+    {"icon": Icons.credit_card, "title": "Payment Methods"},
+    {"icon": Icons.help_outline, "title": "Help & Support"},
+    {"icon": Icons.settings, "title": "Settings"},
+  ];
+
   // Text Controller'lar (Kullanıcı yazarken imlecin kaybolmaması için)
   late TextEditingController _titleCtrl;
   late TextEditingController _subtitleCtrl;
@@ -111,6 +122,8 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   late TextEditingController _bundleTitleCtrl;
   late TextEditingController _couponCodeCtrl;
   late TextEditingController _couponDescCtrl;
+  
+  late List<TextEditingController> _drawerItemCtrls;
 
   @override
   void initState() {
@@ -140,6 +153,8 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _bundleTitleCtrl = TextEditingController(text: _bundleTitle);
     _couponCodeCtrl = TextEditingController(text: _couponCode);
     _couponDescCtrl = TextEditingController(text: _couponDesc);
+    
+    _drawerItemCtrls = _drawerItems.map((item) => TextEditingController(text: item["title"] as String)).toList();
   }
 
   @override
@@ -169,6 +184,10 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _bundleTitleCtrl.dispose();
     _couponCodeCtrl.dispose();
     _couponDescCtrl.dispose();
+    
+    for (var ctrl in _drawerItemCtrls) {
+      ctrl.dispose();
+    }
     super.dispose();
   }
 
@@ -229,16 +248,11 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                       avatarLetter: _drawerUserName.isNotEmpty ? _drawerUserName[0].toUpperCase() : "G",
                       loyaltyStamps: 3,
                       totalMokaPoints: _drawerPoints,
-                      menuItems: [
-                        DrawerMenuItem(icon: Icons.person_outline, title: "My Profile", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.history, title: "Order History", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.local_offer_outlined, title: "Campaigns", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.favorite_border, title: "Favorites", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.location_on_outlined, title: "My Addresses", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.credit_card, title: "Payment Methods", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.help_outline, title: "Help & Support", onTap: () {}),
-                        DrawerMenuItem(icon: Icons.settings, title: "Settings", onTap: () {}),
-                      ],
+                      menuItems: _drawerItems.map((item) => DrawerMenuItem(
+                        icon: item["icon"] as IconData,
+                        title: item["title"] as String,
+                        onTap: () {},
+                      )).toList(),
                       onCallWaiterTap: () {},
                       onLogoutTap: () {},
                     ),
@@ -533,6 +547,63 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
         _buildTextField("User Email", _drawerUserEmailCtrl, (val) => setState(() => _drawerUserEmail = val)),
         _buildTextField("Moka Points", _drawerPointsCtrl, (val) => setState(() => _drawerPoints = int.tryParse(val) ?? 0)),
         _buildTextField("Active Table", _drawerTableCtrl, (val) => setState(() => _drawerTable = val)),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Text("Menu Items", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        ),
+        for (var i = 0; i < _drawerItems.length; i++)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: Row(
+              children: [
+                DropdownButton<IconData>(
+                  value: _drawerItems[i]["icon"] as IconData,
+                  items: const [
+                    DropdownMenuItem(value: Icons.person_outline, child: Icon(Icons.person_outline, size: 20)),
+                    DropdownMenuItem(value: Icons.history, child: Icon(Icons.history, size: 20)),
+                    DropdownMenuItem(value: Icons.local_offer_outlined, child: Icon(Icons.local_offer_outlined, size: 20)),
+                    DropdownMenuItem(value: Icons.favorite_border, child: Icon(Icons.favorite_border, size: 20)),
+                    DropdownMenuItem(value: Icons.location_on_outlined, child: Icon(Icons.location_on_outlined, size: 20)),
+                    DropdownMenuItem(value: Icons.credit_card, child: Icon(Icons.credit_card, size: 20)),
+                    DropdownMenuItem(value: Icons.help_outline, child: Icon(Icons.help_outline, size: 20)),
+                    DropdownMenuItem(value: Icons.settings, child: Icon(Icons.settings, size: 20)),
+                    DropdownMenuItem(value: Icons.star_border, child: Icon(Icons.star_border, size: 20)),
+                    DropdownMenuItem(value: Icons.shopping_bag_outlined, child: Icon(Icons.shopping_bag_outlined, size: 20)),
+                    DropdownMenuItem(value: Icons.notifications_none, child: Icon(Icons.notifications_none, size: 20)),
+                  ],
+                  onChanged: (IconData? newIcon) {
+                    if (newIcon != null) {
+                      setState(() {
+                        _drawerItems[i]["icon"] = newIcon;
+                      });
+                    }
+                  },
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextField(
+                    controller: _drawerItemCtrls[i],
+                    onChanged: (val) {
+                      setState(() {
+                        _drawerItems[i]["title"] = val;
+                      });
+                    },
+                    style: const TextStyle(fontSize: 14),
+                    decoration: InputDecoration(
+                      labelText: "Item ${i + 1}",
+                      labelStyle: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(4)),
+                      focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.blue), borderRadius: BorderRadius.circular(4)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
