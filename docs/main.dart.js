@@ -42818,7 +42818,7 @@ $S:0}
 A.ahG.prototype={
 $0(){var s=0,r=A.P(t.H),q
 var $async$$0=A.Q(function(a,b){if(a===1)return A.M(b,r)
-for(;;)switch(s){case 0:q=A.hl("api/",0,null)
+for(;;)switch(s){case 0:q=A.hl("https://sebinc14.github.io/cafe_vitrin/api/",0,null)
 s=4
 return A.R(A.avw(q),$async$$0)
 case 4:s=b?2:3

@@ -508,7 +508,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
           const Spacer(),
           TextButton.icon(
             onPressed: () async {
-              final url = Uri.parse('api/');
+              final url = Uri.parse('https://sebinc14.github.io/cafe_vitrin/api/');
               if (await canLaunchUrl(url)) {
                 await launchUrl(url);
               }
