@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class DrawerMenuItem {
-  final IconData icon;
+  final IconData? icon;
+  final String? iconUrl;
   final String title;
   final Color? iconColor;
   final Widget? trailingWidget;
   final VoidCallback onTap;
 
   const DrawerMenuItem({
-    required this.icon,
+    this.icon,
+    this.iconUrl,
     required this.title,
     required this.onTap,
     this.iconColor,
@@ -294,6 +296,7 @@ class CustomDrawerWidget extends StatelessWidget {
                   ...menuItems.map(
                     (item) => _buildMenuItem(
                       icon: item.icon,
+                      iconUrl: item.iconUrl,
                       title: item.title,
                       iconColor: item.iconColor ?? Colors.grey,
                       trailingWidget: item.trailingWidget,
@@ -409,7 +412,8 @@ class CustomDrawerWidget extends StatelessWidget {
 
   // YARDIMCI WİDGETLAR
   Widget _buildMenuItem({
-    required IconData icon,
+    IconData? icon,
+    String? iconUrl,
     required String title,
     required Color iconColor,
     Widget? trailingWidget,
@@ -423,7 +427,15 @@ class CustomDrawerWidget extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: ListTile(
-        leading: Icon(icon, color: iconColor, size: 22),
+        leading: iconUrl != null && iconUrl.isNotEmpty 
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: SizedBox(
+                  width: 22, height: 22, 
+                  child: Image.network(iconUrl, fit: BoxFit.cover, errorBuilder: (ctx, err, st) => Icon(icon ?? Icons.circle, color: iconColor, size: 22))
+                )
+              )
+            : Icon(icon ?? Icons.circle, color: iconColor, size: 22),
         title: Text(
           title,
           style: const TextStyle(

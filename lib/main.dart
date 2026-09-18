@@ -124,6 +124,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   late TextEditingController _couponDescCtrl;
   
   late List<TextEditingController> _drawerItemCtrls;
+  late List<TextEditingController> _drawerIconUrlCtrls;
 
   @override
   void initState() {
@@ -155,6 +156,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _couponDescCtrl = TextEditingController(text: _couponDesc);
     
     _drawerItemCtrls = _drawerItems.map((item) => TextEditingController(text: item["title"] as String)).toList();
+    _drawerIconUrlCtrls = _drawerItems.map((item) => TextEditingController(text: item["iconUrl"] as String? ?? "")).toList();
   }
 
   @override
@@ -186,6 +188,9 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _couponDescCtrl.dispose();
     
     for (var ctrl in _drawerItemCtrls) {
+      ctrl.dispose();
+    }
+    for (var ctrl in _drawerIconUrlCtrls) {
       ctrl.dispose();
     }
     super.dispose();
@@ -249,7 +254,8 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                       loyaltyStamps: 3,
                       totalMokaPoints: _drawerPoints,
                       menuItems: _drawerItems.map((item) => DrawerMenuItem(
-                        icon: item["icon"] as IconData,
+                        icon: item["icon"] as IconData?,
+                        iconUrl: item["iconUrl"] as String?,
                         title: item["title"] as String,
                         onTap: () {},
                       )).toList(),
@@ -557,28 +563,25 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
             padding: const EdgeInsets.only(bottom: 12.0),
             child: Row(
               children: [
-                DropdownButton<IconData>(
-                  value: _drawerItems[i]["icon"] as IconData,
-                  items: const [
-                    DropdownMenuItem(value: Icons.person_outline, child: Icon(Icons.person_outline, size: 20)),
-                    DropdownMenuItem(value: Icons.history, child: Icon(Icons.history, size: 20)),
-                    DropdownMenuItem(value: Icons.local_offer_outlined, child: Icon(Icons.local_offer_outlined, size: 20)),
-                    DropdownMenuItem(value: Icons.favorite_border, child: Icon(Icons.favorite_border, size: 20)),
-                    DropdownMenuItem(value: Icons.location_on_outlined, child: Icon(Icons.location_on_outlined, size: 20)),
-                    DropdownMenuItem(value: Icons.credit_card, child: Icon(Icons.credit_card, size: 20)),
-                    DropdownMenuItem(value: Icons.help_outline, child: Icon(Icons.help_outline, size: 20)),
-                    DropdownMenuItem(value: Icons.settings, child: Icon(Icons.settings, size: 20)),
-                    DropdownMenuItem(value: Icons.star_border, child: Icon(Icons.star_border, size: 20)),
-                    DropdownMenuItem(value: Icons.shopping_bag_outlined, child: Icon(Icons.shopping_bag_outlined, size: 20)),
-                    DropdownMenuItem(value: Icons.notifications_none, child: Icon(Icons.notifications_none, size: 20)),
-                  ],
-                  onChanged: (IconData? newIcon) {
-                    if (newIcon != null) {
+                Expanded(
+                  child: TextField(
+                    controller: _drawerIconUrlCtrls[i],
+                    onChanged: (val) {
                       setState(() {
-                        _drawerItems[i]["icon"] = newIcon;
+                        _drawerItems[i]["iconUrl"] = val;
                       });
-                    }
-                  },
+                    },
+                    style: const TextStyle(fontSize: 14),
+                    decoration: InputDecoration(
+                      labelText: "Icon URL",
+                      labelStyle: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(4)),
+                      focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.blue), borderRadius: BorderRadius.circular(4)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
