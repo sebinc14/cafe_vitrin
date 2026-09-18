@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_header.dart';
 import 'search_widget.dart';
@@ -505,6 +506,22 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
           const SizedBox(width: 16),
           const Text("Widgets", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const Spacer(),
+          TextButton.icon(
+            onPressed: () async {
+              final url = Uri.parse('api/');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url);
+              }
+            },
+            icon: const Icon(Icons.menu_book, size: 16),
+            label: const Text("Docs"),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+          ),
+          const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
