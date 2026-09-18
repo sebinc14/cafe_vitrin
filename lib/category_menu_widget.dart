@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CategoryMenuWidget extends StatelessWidget {
   final List<Map<String, dynamic>> categories;
   final Function(Map<String, dynamic>) onCategoryTap;
+  final Color activeColor;
 
   const CategoryMenuWidget({
     super.key,
     required this.categories,
     required this.onCategoryTap,
+    this.activeColor = const Color(0xFF6B4E3D),
   });
 
   @override

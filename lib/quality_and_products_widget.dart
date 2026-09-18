@@ -11,6 +11,7 @@ class QualityAndProductsWidget extends StatelessWidget {
   final Color viewAllColor;
   final Color priceColor;
   final Color buttonTextColor;
+  final Color addToCartButtonColor;
   final Color buttonBorderColor;
   final Color iconColor;
   final Color favoriteIconColor;
@@ -30,6 +31,7 @@ class QualityAndProductsWidget extends StatelessWidget {
     this.viewAllColor = Colors.brown,
     this.priceColor = Colors.brown,
     this.buttonTextColor = Colors.brown,
+    this.addToCartButtonColor = Colors.amber,
     this.buttonBorderColor = Colors.amber,
     this.iconColor = Colors.amber,
     this.favoriteIconColor = Colors.redAccent,

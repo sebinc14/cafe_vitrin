@@ -5,6 +5,7 @@ class BundleWidget extends StatelessWidget {
   final List<Map<String, dynamic>> products;
   final double totalPrice;
   final VoidCallback onAddBundle;
+  final Color buttonColor;
 
   const BundleWidget({
     super.key,
@@ -12,6 +13,7 @@ class BundleWidget extends StatelessWidget {
     required this.products,
     required this.totalPrice,
     required this.onAddBundle,
+    this.buttonColor = Colors.deepOrange,
   });
 
   @override
@@ -78,7 +80,7 @@ class BundleWidget extends StatelessWidget {
                 ElevatedButton(
                   onPressed: onAddBundle,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrange,
+                    backgroundColor: buttonColor,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

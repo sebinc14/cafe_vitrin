@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CouponWidget extends StatelessWidget {
-  final String code;
+  final String couponCode;
   final String description;
   final VoidCallback onCopy;
+  final Color backgroundColor;
+  final Color iconColor;
+  final Color buttonColor;
 
   const CouponWidget({
     super.key,
-    required this.code,
+    required this.couponCode,
     required this.description,
     required this.onCopy,
+    this.backgroundColor = Colors.white,
+    this.iconColor = const Color(0xFF6B4E3D),
+    this.buttonColor = Colors.amber,
   });
 
   @override
@@ -31,12 +37,12 @@ class CouponWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.orange[100],
+                      color: iconColor.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.local_offer, color: Colors.deepOrange),
+                    child: Icon(Icons.local_offer, color: iconColor, size: 24),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -51,15 +57,15 @@ class CouponWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepOrange, style: BorderStyle.solid),
+                            color: buttonColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            code,
-                            style: const TextStyle(
+                            couponCode,
+                            style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
-                              color: Colors.deepOrange,
+                              color: buttonColor,
                               letterSpacing: 1,
                             ),
                           ),

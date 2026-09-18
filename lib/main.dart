@@ -55,6 +55,25 @@ class BuilderHomePage extends StatefulWidget {
 
 class _BuilderHomePageState extends State<BuilderHomePage> {
   // --- STATE DEĞİŞKENLERİ ---
+  Color _colorFromHex(String hex, Color fallback) {
+    try {
+      final hexCode = hex.replaceAll('#', '');
+      if (hexCode.length == 6) {
+        return Color(int.parse('FF$hexCode', radix: 16));
+      } else if (hexCode.length == 8) {
+        return Color(int.parse(hexCode, radix: 16));
+      }
+    } catch (e) {
+      // ignore
+    }
+    return fallback;
+  }
+
+  String _hexFromColor(Color color) {
+    return '#${color.value.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+  }
+
+  // Header
   String _headerTitle = "Moka Mola";
   String _headerSubtitle = "CAFE";
   String _searchHint = "Search coffee, desserts...";
@@ -147,6 +166,14 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   late TextEditingController _flashSaleImageCtrl;
   late TextEditingController _productImageCtrl;
   
+  Color _primaryColor = const Color(0xFF6B4E3D);
+  Color _accentColor = Colors.amber;
+  Color _scaffoldBgColor = Colors.white;
+
+  late TextEditingController _primaryColorCtrl;
+  late TextEditingController _accentColorCtrl;
+  late TextEditingController _scaffoldBgColorCtrl;
+
   late List<TextEditingController> _drawerItemCtrls;
   late List<TextEditingController> _drawerIconUrlCtrls;
 
@@ -191,6 +218,10 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _flashSaleImageCtrl = TextEditingController(text: _flashSaleImageUrl);
     _productImageCtrl = TextEditingController(text: _productImageUrl);
     
+    _primaryColorCtrl = TextEditingController(text: _hexFromColor(_primaryColor));
+    _accentColorCtrl = TextEditingController(text: _hexFromColor(_accentColor));
+    _scaffoldBgColorCtrl = TextEditingController(text: _hexFromColor(_scaffoldBgColor));
+
     _drawerItemCtrls = _drawerItems.map((item) => TextEditingController(text: item["title"] as String)).toList();
     _drawerIconUrlCtrls = _drawerItems.map((item) => TextEditingController(text: item["iconUrl"] as String? ?? "")).toList();
     
@@ -234,6 +265,10 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _baristaImageCtrl.dispose();
     _flashSaleImageCtrl.dispose();
     _productImageCtrl.dispose();
+    
+    _primaryColorCtrl.dispose();
+    _accentColorCtrl.dispose();
+    _scaffoldBgColorCtrl.dispose();
     
     for (var ctrl in _drawerItemCtrls) {
       ctrl.dispose();
@@ -279,6 +314,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
+                      _buildThemeConfig(),
                       _buildHeaderConfig(),
                       _buildSearchConfig(),
                       _buildBannerConfig(),
@@ -305,8 +341,12 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                 padding: const EdgeInsets.all(20.0),
                 child: MobileMockup(
                   child: Scaffold(
-                    backgroundColor: Colors.white,
+                    backgroundColor: _scaffoldBgColor,
                     drawer: CustomDrawerWidget(
+                      backgroundColor: _scaffoldBgColor,
+                      primaryColor: _primaryColor,
+                      accentColor: _accentColor,
+                      cardBackgroundColor: _scaffoldBgColor,
                       activeTable: _drawerTable,
                       userName: _drawerUserName,
                       userEmail: _drawerUserEmail,
@@ -325,35 +365,47 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                     body: ListView(
                       children: [
                         CustomHeader(
+                          primaryColor: _primaryColor,
+                          accentColor: _accentColor,
                           title: _headerTitle,
                           subtitle: _headerSubtitle,
                           activeTable: _drawerTable,
                           totalItemCount: 3,
                         ),
                         SearchWidget(
+                          primaryColor: _primaryColor,
+                          accentColor: _accentColor,
                           hintText: _searchHint,
                           products: const [],
                           onProductTap: (p) {},
                         ),
                         const SizedBox(height: 16),
                         StoryWidget(
+                          primaryColor: _primaryColor,
+                          accentColor: _accentColor,
                           stories: [
                             {"image": _storyImageUrl, "title": _storyTitle, "isLive": _storyIsLive},
                           ],
                         ),
                         const SizedBox(height: 16),
                         CategoryMenuWidget(
+                          activeColor: _primaryColor,
                           categories: _categoryItems,
                           onCategoryTap: (c) {},
                         ),
                         const SizedBox(height: 16),
                         CouponWidget(
-                          code: _couponCode,
+                          backgroundColor: _scaffoldBgColor,
+                          iconColor: _primaryColor,
+                          buttonColor: _accentColor,
+                          couponCode: _couponCode,
                           description: _couponDesc,
                           onCopy: () {},
                         ),
                         const SizedBox(height: 16),
                         BannerCarouselWidget(
+                          indicatorActiveColor: _primaryColor,
+                          indicatorInactiveColor: _primaryColor.withValues(alpha: 0.3),
                           banners: [
                             {
                               "imageUrl": _bannerImageUrl,
@@ -365,6 +417,9 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         ),
                         const SizedBox(height: 16),
                         BaristaSuggestionWidget(
+                          backgroundColor: _primaryColor.withValues(alpha: 0.8),
+                          buttonColor: _accentColor,
+                          priceColor: _accentColor,
                           productName: _baristaProductName,
                           description: "Carefully selected coffee beans.",
                           imageUrl: _baristaImageUrl,
@@ -373,6 +428,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         ),
                         const SizedBox(height: 16),
                         BundleWidget(
+                          buttonColor: _accentColor,
                           title: _bundleTitle,
                           products: _bundleItems,
                           totalPrice: 120.0,
@@ -380,6 +436,9 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         ),
                         const SizedBox(height: 16),
                         FlashSaleWidget(
+                          primaryColor: _primaryColor,
+                          accentColor: _accentColor,
+                          timerColor: _accentColor,
                           products: [
                             {
                               "name": _flashSaleName,
@@ -394,6 +453,11 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         ),
                         const SizedBox(height: 24),
                         QualityAndProductsWidget(
+                          titleColor: Colors.black87,
+                          priceColor: _primaryColor,
+                          addToCartButtonColor: _primaryColor,
+                          buttonBorderColor: _accentColor,
+                          iconColor: _accentColor,
                           products: [
                             {
                               "name": _productName,
@@ -408,6 +472,8 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                       ],
                     ),
                     floatingActionButton: FloatingCallWaiterWidget(
+                      primaryColor: _primaryColor,
+                      accentColor: _accentColor,
                       activeTable: _drawerTable,
                       onCallWaiter: () {},
                     ),
@@ -488,6 +554,32 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
           fillColor: Colors.white,
         ),
       ),
+    );
+  }
+
+  Widget _buildThemeConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("THEME COLORS"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Primary Color (Hex)", _primaryColorCtrl, (val) {
+          setState(() {
+            _primaryColor = _colorFromHex(val, _primaryColor);
+          });
+        }),
+        _buildTextField("Accent/Button Color (Hex)", _accentColorCtrl, (val) {
+          setState(() {
+            _accentColor = _colorFromHex(val, _accentColor);
+          });
+        }),
+        _buildTextField("Background Color (Hex)", _scaffoldBgColorCtrl, (val) {
+          setState(() {
+            _scaffoldBgColor = _colorFromHex(val, _scaffoldBgColor);
+          });
+        }),
+      ],
     );
   }
 
