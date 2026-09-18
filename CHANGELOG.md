@@ -1,3 +1,7 @@
+﻿## 1.0.5
+
+* Added documentation button to the local web builder.
+* Fixed CORS issues with remote images by enforcing HTML renderer.
 ## 1.0.4
 
 * Added theme color customization parameters to all widgets.
