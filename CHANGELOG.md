@@ -1,5 +1,11 @@
-## 1.0.3
+## 1.0.4
 
+* Added theme color customization parameters to all widgets.
+* Added support for custom image URLs in widgets.
+* Added support for custom icon URLs in Drawer Widget.
+* Localized drawer items to English.
+
+## 1.0.3
 * Re-published to fix version conflicts.
 
 ## 1.0.2* Fixed `use_super_parameters` linter warnings to improve package score.
