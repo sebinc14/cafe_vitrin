@@ -85,6 +85,24 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   String _couponCode = "MOKA10";
   String _couponDesc = "Use code for 10% off your first order!";
 
+  String _storyImageUrl = "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=250&q=80";
+  String _bannerImageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&q=80";
+  String _baristaImageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80";
+  String _flashSaleImageUrl = "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80";
+  String _productImageUrl = "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80";
+
+  List<Map<String, dynamic>> _categoryItems = [
+    {"title": "Hot Drinks", "image": "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=150&q=80"},
+    {"title": "Cold Drinks", "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=150&q=80"},
+    {"title": "Bakery", "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80"},
+    {"title": "Desserts", "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=150&q=80"},
+  ];
+
+  List<Map<String, dynamic>> _bundleItems = [
+    {"name": "Latte", "image": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=150&q=80"},
+    {"name": "Croissant", "image": "https://images.unsplash.com/photo-1555507036-ab1f40ce88cb?auto=format&fit=crop&w=150&q=80"},
+  ];
+
   List<Map<String, dynamic>> _drawerItems = [
     {"icon": Icons.person_outline, "title": "My Profile"},
     {"icon": Icons.history, "title": "Order History"},
@@ -123,8 +141,20 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   late TextEditingController _couponCodeCtrl;
   late TextEditingController _couponDescCtrl;
   
+  late TextEditingController _storyImageCtrl;
+  late TextEditingController _bannerImageCtrl;
+  late TextEditingController _baristaImageCtrl;
+  late TextEditingController _flashSaleImageCtrl;
+  late TextEditingController _productImageCtrl;
+  
   late List<TextEditingController> _drawerItemCtrls;
   late List<TextEditingController> _drawerIconUrlCtrls;
+
+  late List<TextEditingController> _categoryTitleCtrls;
+  late List<TextEditingController> _categoryImageCtrls;
+
+  late List<TextEditingController> _bundleNameCtrls;
+  late List<TextEditingController> _bundleImageCtrls;
 
   @override
   void initState() {
@@ -155,8 +185,20 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _couponCodeCtrl = TextEditingController(text: _couponCode);
     _couponDescCtrl = TextEditingController(text: _couponDesc);
     
+    _storyImageCtrl = TextEditingController(text: _storyImageUrl);
+    _bannerImageCtrl = TextEditingController(text: _bannerImageUrl);
+    _baristaImageCtrl = TextEditingController(text: _baristaImageUrl);
+    _flashSaleImageCtrl = TextEditingController(text: _flashSaleImageUrl);
+    _productImageCtrl = TextEditingController(text: _productImageUrl);
+    
     _drawerItemCtrls = _drawerItems.map((item) => TextEditingController(text: item["title"] as String)).toList();
     _drawerIconUrlCtrls = _drawerItems.map((item) => TextEditingController(text: item["iconUrl"] as String? ?? "")).toList();
+    
+    _categoryTitleCtrls = _categoryItems.map((item) => TextEditingController(text: item["title"] as String)).toList();
+    _categoryImageCtrls = _categoryItems.map((item) => TextEditingController(text: item["image"] as String)).toList();
+    
+    _bundleNameCtrls = _bundleItems.map((item) => TextEditingController(text: item["name"] as String)).toList();
+    _bundleImageCtrls = _bundleItems.map((item) => TextEditingController(text: item["image"] as String)).toList();
   }
 
   @override
@@ -187,10 +229,28 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _couponCodeCtrl.dispose();
     _couponDescCtrl.dispose();
     
+    _storyImageCtrl.dispose();
+    _bannerImageCtrl.dispose();
+    _baristaImageCtrl.dispose();
+    _flashSaleImageCtrl.dispose();
+    _productImageCtrl.dispose();
+    
     for (var ctrl in _drawerItemCtrls) {
       ctrl.dispose();
     }
     for (var ctrl in _drawerIconUrlCtrls) {
+      ctrl.dispose();
+    }
+    for (var ctrl in _categoryTitleCtrls) {
+      ctrl.dispose();
+    }
+    for (var ctrl in _categoryImageCtrls) {
+      ctrl.dispose();
+    }
+    for (var ctrl in _bundleNameCtrls) {
+      ctrl.dispose();
+    }
+    for (var ctrl in _bundleImageCtrls) {
       ctrl.dispose();
     }
     super.dispose();
@@ -278,17 +338,12 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         const SizedBox(height: 16),
                         StoryWidget(
                           stories: [
-                            {"image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=250&q=80", "title": _storyTitle, "isLive": _storyIsLive},
+                            {"image": _storyImageUrl, "title": _storyTitle, "isLive": _storyIsLive},
                           ],
                         ),
                         const SizedBox(height: 16),
                         CategoryMenuWidget(
-                          categories: const [
-                            {"title": "Hot Drinks", "image": "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=150&q=80"},
-                            {"title": "Cold Drinks", "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=150&q=80"},
-                            {"title": "Bakery", "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80"},
-                            {"title": "Desserts", "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=150&q=80"},
-                          ],
+                          categories: _categoryItems,
                           onCategoryTap: (c) {},
                         ),
                         const SizedBox(height: 16),
@@ -301,7 +356,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         BannerCarouselWidget(
                           banners: [
                             {
-                              "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&q=80",
+                              "imageUrl": _bannerImageUrl,
                               "tagText": "NEW",
                               "title": _bannerTitle,
                               "subtitle": _bannerSubtitle,
@@ -312,17 +367,14 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         BaristaSuggestionWidget(
                           productName: _baristaProductName,
                           description: "Carefully selected coffee beans.",
-                          imageUrl: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80",
+                          imageUrl: _baristaImageUrl,
                           price: _baristaPrice,
                           onTap: () {},
                         ),
                         const SizedBox(height: 16),
                         BundleWidget(
                           title: _bundleTitle,
-                          products: const [
-                            {"name": "Latte", "image": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=150&q=80"},
-                            {"name": "Croissant", "image": "https://images.unsplash.com/photo-1555507036-ab1f40ce88cb?auto=format&fit=crop&w=150&q=80"},
-                          ],
+                          products: _bundleItems,
                           totalPrice: 120.0,
                           onAddBundle: () {},
                         ),
@@ -335,7 +387,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                               "oldPrice": _flashSaleOldPrice,
                               "price": _flashSalePrice,
                               "discountPercentage": _flashSaleOldPrice > 0 ? ((_flashSaleOldPrice - _flashSalePrice) / _flashSaleOldPrice * 100).roundToDouble() : 0.0,
-                              "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80",
+                              "imageUrl": _flashSaleImageUrl,
                             },
                           ],
                           onProductTap: (p) => {},
@@ -347,7 +399,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                               "name": _productName,
                               "description": _productDesc,
                               "price": _productPrice,
-                              "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80",
+                              "imageUrl": _productImageUrl,
                             },
                           ],
                           onProductTap: (p) => {},
@@ -474,6 +526,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
       children: [
         _buildTextField("Banner Title", _bannerTitleCtrl, (val) => setState(() => _bannerTitle = val)),
         _buildTextField("Banner Subtitle", _bannerSubCtrl, (val) => setState(() => _bannerSubtitle = val)),
+        _buildTextField("Banner Image URL", _bannerImageCtrl, (val) => setState(() => _bannerImageUrl = val)),
       ],
     );
   }
@@ -491,6 +544,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
             _baristaPrice = double.tryParse(val) ?? 0.0;
           });
         }),
+        _buildTextField("Product Image URL", _baristaImageCtrl, (val) => setState(() => _baristaImageUrl = val)),
       ],
     );
   }
@@ -503,6 +557,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
       childrenPadding: const EdgeInsets.all(16),
       children: [
         _buildTextField("Story Title", _storyTitleCtrl, (val) => setState(() => _storyTitle = val)),
+        _buildTextField("Story Image URL", _storyImageCtrl, (val) => setState(() => _storyImageUrl = val)),
         SwitchListTile(
           title: const Text("Is Live?", style: TextStyle(fontSize: 14)),
           value: _storyIsLive,
@@ -524,6 +579,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
         _buildTextField("Description", _flashSaleDescCtrl, (val) => setState(() => _flashSaleDesc = val)),
         _buildTextField("Old Price", _flashSaleOldPriceCtrl, (val) => setState(() => _flashSaleOldPrice = double.tryParse(val) ?? 0.0)),
         _buildTextField("New Price", _flashSalePriceCtrl, (val) => setState(() => _flashSalePrice = double.tryParse(val) ?? 0.0)),
+        _buildTextField("Product Image URL", _flashSaleImageCtrl, (val) => setState(() => _flashSaleImageUrl = val)),
       ],
     );
   }
@@ -538,6 +594,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
         _buildTextField("Product Name", _productNameCtrl, (val) => setState(() => _productName = val)),
         _buildTextField("Description", _productDescCtrl, (val) => setState(() => _productDesc = val)),
         _buildTextField("Price", _productPriceCtrl, (val) => setState(() => _productPrice = double.tryParse(val) ?? 0.0)),
+        _buildTextField("Product Image URL", _productImageCtrl, (val) => setState(() => _productImageUrl = val)),
       ],
     );
   }
@@ -617,8 +674,26 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
       backgroundColor: const Color(0xFFF9F9F9),
       collapsedBackgroundColor: Colors.white,
       childrenPadding: const EdgeInsets.all(16),
-      children: const [
-        Text("Categories (Hot Drinks, Cold Drinks, Bakery, Desserts) are fixed in preview for now.", style: TextStyle(fontSize: 12, color: Colors.grey)),
+      children: [
+        for (var i = 0; i < _categoryItems.length; i++)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Category ${i + 1}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+              const SizedBox(height: 4),
+              _buildTextField("Title", _categoryTitleCtrls[i], (val) {
+                setState(() {
+                  _categoryItems[i]["title"] = val;
+                });
+              }),
+              _buildTextField("Image URL", _categoryImageCtrls[i], (val) {
+                setState(() {
+                  _categoryItems[i]["image"] = val;
+                });
+              }),
+              const Divider(),
+            ],
+          ),
       ],
     );
   }
@@ -631,6 +706,29 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
       childrenPadding: const EdgeInsets.all(16),
       children: [
         _buildTextField("Bundle Title", _bundleTitleCtrl, (val) => setState(() => _bundleTitle = val)),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Text("Bundle Products", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        ),
+        for (var i = 0; i < _bundleItems.length; i++)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Product ${i + 1}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+              const SizedBox(height: 4),
+              _buildTextField("Name", _bundleNameCtrls[i], (val) {
+                setState(() {
+                  _bundleItems[i]["name"] = val;
+                });
+              }),
+              _buildTextField("Image URL", _bundleImageCtrls[i], (val) {
+                setState(() {
+                  _bundleItems[i]["image"] = val;
+                });
+              }),
+              const Divider(),
+            ],
+          ),
       ],
     );
   }
