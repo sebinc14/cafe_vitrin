@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 import 'custom_header.dart';
 import 'search_widget.dart';
@@ -9,9 +10,21 @@ import 'barista_suggestion_widget.dart';
 import 'quality_and_products_widget.dart';
 import 'custom_drawer_widget.dart';
 import 'floating_call_waiter_widget.dart';
+import 'category_menu_widget.dart';
+import 'bundle_widget.dart';
+import 'coupon_widget.dart';
 
 void main() {
   runApp(const CafeBuilderApp());
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
 }
 
 class CafeBuilderApp extends StatelessWidget {
@@ -22,6 +35,7 @@ class CafeBuilderApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Cafe Vitrin Builder',
+      scrollBehavior: MyCustomScrollBehavior(),
       theme: ThemeData(
         primarySwatch: Colors.brown,
         scaffoldBackgroundColor: const Color(0xFFE5E5E5), // Koyu gri arka plan
@@ -43,11 +57,33 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   // --- STATE DEĞİŞKENLERİ ---
   String _headerTitle = "Moka Mola";
   String _headerSubtitle = "CAFE";
-  String _searchHint = "Kahve, tatlı ara...";
+  String _searchHint = "Search coffee, desserts...";
   String _baristaProductName = "Barista's Special Coffee of the Week";
   double _baristaPrice = 85.0;
   String _bannerTitle = "Summer Deals";
-  String _bannerSubtitle = "Tüm soğuk içeceklerde %20 indirim!";
+  String _bannerSubtitle = "20% off all cold beverages!";
+
+  // Yeni State Değişkenleri
+  String _storyTitle = "New";
+  bool _storyIsLive = true;
+  
+  String _flashSaleName = "Caramel Macchiato";
+  String _flashSaleDesc = "Hot Drinks";
+  double _flashSaleOldPrice = 120.0;
+  double _flashSalePrice = 80.0;
+  
+  String _productName = "Latte";
+  String _productDesc = "Espresso and milk";
+  double _productPrice = 75.0;
+  
+  String _drawerUserName = "Guest";
+  String _drawerUserEmail = "guest@example.com";
+  int _drawerPoints = 120;
+  String _drawerTable = "Table 5";
+  
+  String _bundleTitle = "Morning Bundle";
+  String _couponCode = "MOKA10";
+  String _couponDesc = "Use code for 10% off your first order!";
 
   // Text Controller'lar (Kullanıcı yazarken imlecin kaybolmaması için)
   late TextEditingController _titleCtrl;
@@ -57,6 +93,24 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
   late TextEditingController _baristaPriceCtrl;
   late TextEditingController _bannerTitleCtrl;
   late TextEditingController _bannerSubCtrl;
+  
+  late TextEditingController _storyTitleCtrl;
+  late TextEditingController _flashSaleNameCtrl;
+  late TextEditingController _flashSaleDescCtrl;
+  late TextEditingController _flashSaleOldPriceCtrl;
+  late TextEditingController _flashSalePriceCtrl;
+  late TextEditingController _productNameCtrl;
+  late TextEditingController _productDescCtrl;
+  late TextEditingController _productPriceCtrl;
+  
+  late TextEditingController _drawerUserNameCtrl;
+  late TextEditingController _drawerUserEmailCtrl;
+  late TextEditingController _drawerPointsCtrl;
+  late TextEditingController _drawerTableCtrl;
+  
+  late TextEditingController _bundleTitleCtrl;
+  late TextEditingController _couponCodeCtrl;
+  late TextEditingController _couponDescCtrl;
 
   @override
   void initState() {
@@ -68,6 +122,24 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _baristaPriceCtrl = TextEditingController(text: _baristaPrice.toString());
     _bannerTitleCtrl = TextEditingController(text: _bannerTitle);
     _bannerSubCtrl = TextEditingController(text: _bannerSubtitle);
+    
+    _storyTitleCtrl = TextEditingController(text: _storyTitle);
+    _flashSaleNameCtrl = TextEditingController(text: _flashSaleName);
+    _flashSaleDescCtrl = TextEditingController(text: _flashSaleDesc);
+    _flashSaleOldPriceCtrl = TextEditingController(text: _flashSaleOldPrice.toString());
+    _flashSalePriceCtrl = TextEditingController(text: _flashSalePrice.toString());
+    _productNameCtrl = TextEditingController(text: _productName);
+    _productDescCtrl = TextEditingController(text: _productDesc);
+    _productPriceCtrl = TextEditingController(text: _productPrice.toString());
+    
+    _drawerUserNameCtrl = TextEditingController(text: _drawerUserName);
+    _drawerUserEmailCtrl = TextEditingController(text: _drawerUserEmail);
+    _drawerPointsCtrl = TextEditingController(text: _drawerPoints.toString());
+    _drawerTableCtrl = TextEditingController(text: _drawerTable);
+    
+    _bundleTitleCtrl = TextEditingController(text: _bundleTitle);
+    _couponCodeCtrl = TextEditingController(text: _couponCode);
+    _couponDescCtrl = TextEditingController(text: _couponDesc);
   }
 
   @override
@@ -79,6 +151,24 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
     _baristaPriceCtrl.dispose();
     _bannerTitleCtrl.dispose();
     _bannerSubCtrl.dispose();
+    
+    _storyTitleCtrl.dispose();
+    _flashSaleNameCtrl.dispose();
+    _flashSaleDescCtrl.dispose();
+    _flashSaleOldPriceCtrl.dispose();
+    _flashSalePriceCtrl.dispose();
+    _productNameCtrl.dispose();
+    _productDescCtrl.dispose();
+    _productPriceCtrl.dispose();
+    
+    _drawerUserNameCtrl.dispose();
+    _drawerUserEmailCtrl.dispose();
+    _drawerPointsCtrl.dispose();
+    _drawerTableCtrl.dispose();
+    
+    _bundleTitleCtrl.dispose();
+    _couponCodeCtrl.dispose();
+    _couponDescCtrl.dispose();
     super.dispose();
   }
 
@@ -109,10 +199,13 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                       _buildSearchConfig(),
                       _buildBannerConfig(),
                       _buildBaristaConfig(),
-                      // Tıklanamayan boş menüler (Görsellik için)
-                      _buildEmptyTile("STORY"),
-                      _buildEmptyTile("FLASH SALE"),
-                      _buildEmptyTile("PRODUCTS"),
+                      _buildStoryConfig(),
+                      _buildFlashSaleConfig(),
+                      _buildProductsConfig(),
+                      _buildDrawerConfig(),
+                      _buildCategoryMenuConfig(),
+                      _buildBundleConfig(),
+                      _buildCouponConfig(),
                       _buildEmptyTile("DIVIDER"),
                     ],
                   ),
@@ -130,14 +223,21 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                   child: Scaffold(
                     backgroundColor: Colors.white,
                     drawer: CustomDrawerWidget(
-                      activeTable: 'Table 5',
-                      userName: "Misafir",
-                      userEmail: "misafir@example.com",
-                      avatarLetter: "M",
+                      activeTable: _drawerTable,
+                      userName: _drawerUserName,
+                      userEmail: _drawerUserEmail,
+                      avatarLetter: _drawerUserName.isNotEmpty ? _drawerUserName[0].toUpperCase() : "G",
                       loyaltyStamps: 3,
-                      totalMokaPoints: 120,
+                      totalMokaPoints: _drawerPoints,
                       menuItems: [
-                        DrawerMenuItem(icon: Icons.person_outline, title: "Profilim", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.person_outline, title: "My Profile", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.history, title: "Order History", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.local_offer_outlined, title: "Campaigns", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.favorite_border, title: "Favorites", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.location_on_outlined, title: "My Addresses", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.credit_card, title: "Payment Methods", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.help_outline, title: "Help & Support", onTap: () {}),
+                        DrawerMenuItem(icon: Icons.settings, title: "Settings", onTap: () {}),
                       ],
                       onCallWaiterTap: () {},
                       onLogoutTap: () {},
@@ -147,7 +247,7 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         CustomHeader(
                           title: _headerTitle,
                           subtitle: _headerSubtitle,
-                          activeTable: 'Table 5',
+                          activeTable: _drawerTable,
                           totalItemCount: 3,
                         ),
                         SearchWidget(
@@ -156,10 +256,26 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                           onProductTap: (p) {},
                         ),
                         const SizedBox(height: 16),
-                        const StoryWidget(
+                        StoryWidget(
                           stories: [
-                            {"image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=250&q=80", "title": "New", "isLive": true},
+                            {"image": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=250&q=80", "title": _storyTitle, "isLive": _storyIsLive},
                           ],
+                        ),
+                        const SizedBox(height: 16),
+                        CategoryMenuWidget(
+                          categories: const [
+                            {"title": "Hot Drinks", "image": "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=150&q=80"},
+                            {"title": "Cold Drinks", "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=150&q=80"},
+                            {"title": "Bakery", "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80"},
+                            {"title": "Desserts", "image": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=150&q=80"},
+                          ],
+                          onCategoryTap: (c) {},
+                        ),
+                        const SizedBox(height: 16),
+                        CouponWidget(
+                          code: _couponCode,
+                          description: _couponDesc,
+                          onCopy: () {},
                         ),
                         const SizedBox(height: 16),
                         BannerCarouselWidget(
@@ -175,16 +291,52 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
                         const SizedBox(height: 16),
                         BaristaSuggestionWidget(
                           productName: _baristaProductName,
-                          description: "Özenle seçilmiş kahve çekirdekleri.",
+                          description: "Carefully selected coffee beans.",
                           imageUrl: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80",
                           price: _baristaPrice,
                           onTap: () {},
                         ),
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 16),
+                        BundleWidget(
+                          title: _bundleTitle,
+                          products: const [
+                            {"name": "Latte", "image": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=150&q=80"},
+                            {"name": "Croissant", "image": "https://images.unsplash.com/photo-1555507036-ab1f40ce88cb?auto=format&fit=crop&w=150&q=80"},
+                          ],
+                          totalPrice: 120.0,
+                          onAddBundle: () {},
+                        ),
+                        const SizedBox(height: 16),
+                        FlashSaleWidget(
+                          products: [
+                            {
+                              "name": _flashSaleName,
+                              "description": _flashSaleDesc,
+                              "oldPrice": _flashSaleOldPrice,
+                              "price": _flashSalePrice,
+                              "discountPercentage": _flashSaleOldPrice > 0 ? ((_flashSaleOldPrice - _flashSalePrice) / _flashSaleOldPrice * 100).roundToDouble() : 0.0,
+                              "imageUrl": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=250&q=80",
+                            },
+                          ],
+                          onProductTap: (p) => {},
+                        ),
+                        const SizedBox(height: 24),
+                        QualityAndProductsWidget(
+                          products: [
+                            {
+                              "name": _productName,
+                              "description": _productDesc,
+                              "price": _productPrice,
+                              "imageUrl": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=250&q=80",
+                            },
+                          ],
+                          onProductTap: (p) => {},
+                        ),
+                        const SizedBox(height: 100),
                       ],
                     ),
                     floatingActionButton: FloatingCallWaiterWidget(
-                      activeTable: 'Table 5',
+                      activeTable: _drawerTable,
                       onCallWaiter: () {},
                     ),
                   ),
@@ -319,6 +471,105 @@ class _BuilderHomePageState extends State<BuilderHomePage> {
             _baristaPrice = double.tryParse(val) ?? 0.0;
           });
         }),
+      ],
+    );
+  }
+
+  Widget _buildStoryConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("STORY"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Story Title", _storyTitleCtrl, (val) => setState(() => _storyTitle = val)),
+        SwitchListTile(
+          title: const Text("Is Live?", style: TextStyle(fontSize: 14)),
+          value: _storyIsLive,
+          onChanged: (val) => setState(() => _storyIsLive = val),
+          contentPadding: EdgeInsets.zero,
+        )
+      ],
+    );
+  }
+
+  Widget _buildFlashSaleConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("FLASH SALE"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Product Name", _flashSaleNameCtrl, (val) => setState(() => _flashSaleName = val)),
+        _buildTextField("Description", _flashSaleDescCtrl, (val) => setState(() => _flashSaleDesc = val)),
+        _buildTextField("Old Price", _flashSaleOldPriceCtrl, (val) => setState(() => _flashSaleOldPrice = double.tryParse(val) ?? 0.0)),
+        _buildTextField("New Price", _flashSalePriceCtrl, (val) => setState(() => _flashSalePrice = double.tryParse(val) ?? 0.0)),
+      ],
+    );
+  }
+
+  Widget _buildProductsConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("PRODUCTS"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Product Name", _productNameCtrl, (val) => setState(() => _productName = val)),
+        _buildTextField("Description", _productDescCtrl, (val) => setState(() => _productDesc = val)),
+        _buildTextField("Price", _productPriceCtrl, (val) => setState(() => _productPrice = double.tryParse(val) ?? 0.0)),
+      ],
+    );
+  }
+
+  Widget _buildDrawerConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("DRAWER & PROFILE"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("User Name", _drawerUserNameCtrl, (val) => setState(() => _drawerUserName = val)),
+        _buildTextField("User Email", _drawerUserEmailCtrl, (val) => setState(() => _drawerUserEmail = val)),
+        _buildTextField("Moka Points", _drawerPointsCtrl, (val) => setState(() => _drawerPoints = int.tryParse(val) ?? 0)),
+        _buildTextField("Active Table", _drawerTableCtrl, (val) => setState(() => _drawerTable = val)),
+      ],
+    );
+  }
+
+  Widget _buildCategoryMenuConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("CATEGORY MENU"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: const [
+        Text("Categories (Hot Drinks, Cold Drinks, Bakery, Desserts) are fixed in preview for now.", style: TextStyle(fontSize: 12, color: Colors.grey)),
+      ],
+    );
+  }
+
+  Widget _buildBundleConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("BUNDLE"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Bundle Title", _bundleTitleCtrl, (val) => setState(() => _bundleTitle = val)),
+      ],
+    );
+  }
+
+  Widget _buildCouponConfig() {
+    return ExpansionTile(
+      title: _buildTileTitle("COUPON"),
+      backgroundColor: const Color(0xFFF9F9F9),
+      collapsedBackgroundColor: Colors.white,
+      childrenPadding: const EdgeInsets.all(16),
+      children: [
+        _buildTextField("Coupon Code", _couponCodeCtrl, (val) => setState(() => _couponCode = val)),
+        _buildTextField("Coupon Description", _couponDescCtrl, (val) => setState(() => _couponDesc = val)),
       ],
     );
   }
